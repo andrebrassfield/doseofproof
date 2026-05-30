@@ -1,6 +1,7 @@
 interface Env {
   RESEND_API_KEY: string;
   LEAD_EMAIL: string;
+  RESEND_AUDIENCE_ID?: string;
 }
 
 export async function onRequestPost(context: { request: Request, env: Env }) {
@@ -42,6 +43,21 @@ export async function onRequestPost(context: { request: Request, env: Env }) {
     if (!userEmailRes.ok) {
       console.error('Resend error:', await userEmailRes.text());
       return new Response(JSON.stringify({ error: 'Failed to send user email' }), { status: 500 });
+    }
+
+    // 2. Add to Audience (Newsletter)
+    if (env.RESEND_AUDIENCE_ID) {
+      await fetch(`https://api.resend.com/audiences/${env.RESEND_AUDIENCE_ID}/contacts`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          unsubscribed: false
+        })
+      });
     }
 
     // 2. Notify Andre (if LEAD_EMAIL is set)

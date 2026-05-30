@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
@@ -10,7 +10,14 @@ import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 
 export default function Home() {
+  const [heroVariant, setHeroVariant] = useState<string | null>(null);
+
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      setHeroVariant(searchParams.get("hero"));
+    }
+    
     let ctx: any;
     (async () => {
       const { gsap } = await import('gsap');
@@ -62,8 +69,17 @@ export default function Home() {
               Documenting The Recovery
             </span>
             <h1 className="text-5xl md:text-7xl tracking-tighter leading-[1.1] mb-6">
-              Doctors told me I was fine.<br />
-              <span className="text-white/50">The scans told a different story.</span>
+              {heroVariant === "B" ? (
+                <>
+                  The body has a natural inflammation brake.<br />
+                  <span className="text-white/50">Mine was broken at C1-C2.</span>
+                </>
+              ) : (
+                <>
+                  Doctors told me I was fine.<br />
+                  <span className="text-white/50">The scans told a different story.</span>
+                </>
+              )}
             </h1>
             <p className="text-lg text-muted max-w-[65ch] mb-10 leading-relaxed">
               I got tired of vague wellness advice and broken healthcare incentives. 
