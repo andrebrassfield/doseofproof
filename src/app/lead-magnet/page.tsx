@@ -1,11 +1,36 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { Button } from "@/components/ui/Button";
 
 export default function LeadMagnet() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setSuccess(true);
+        window.open('/marketing-assets/The_First_30_Days_Mold_Detox_Checklist.pdf', '_blank');
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      alert("Failed to submit.");
+    }
+    setLoading(false);
+  };
   return (
     <>
       <Navbar />
@@ -61,17 +86,19 @@ export default function LeadMagnet() {
                 </svg>
               </div>
               <h3 className="font-bold mb-4 relative z-10">Send it to my inbox</h3>
-              <form className="flex flex-col sm:flex-row gap-4 relative z-10" onSubmit={(e) => {
-                e.preventDefault();
-                window.open('/marketing-assets/The_First_30_Days_Mold_Detox_Checklist.pdf', '_blank');
-              }}>
+              <form className="flex flex-col sm:flex-row gap-4 relative z-10" onSubmit={handleSubmit}>
                 <input 
                   type="email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email" 
-                  className="flex-1 h-14 bg-zinc-900 border border-white/20 rounded-lg px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
+                  className="flex-1 h-14 bg-zinc-900 border border-white/20 rounded-lg px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors disabled:opacity-50"
                   required
+                  disabled={loading || success}
                 />
-                <Button size="lg" className="h-14 rounded-lg">Download PDF</Button>
+                <Button size="lg" className="h-14 rounded-lg" disabled={loading || success}>
+                  {loading ? "Sending..." : success ? "Sent!" : "Download PDF"}
+                </Button>
               </form>
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4 relative z-10">
                 <p className="text-xs text-muted">10MB PDF. No spam, just proof.</p>

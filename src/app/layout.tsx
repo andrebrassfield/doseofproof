@@ -13,8 +13,37 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dose of Proof | Not selling. Just proving.",
-  description: "I got tired of vague wellness advice and broken healthcare incentives. This is my experience mapping the actual terrain of CCI, MCAS, and mold recovery.",
+  metadataBase: new URL('https://doseofproof.com'),
+  title: {
+    default: 'Dose of Proof | Not selling. Just proving.',
+    template: '%s | Dose of Proof',
+  },
+  description: 'Documenting the actual terrain of CCI, MCAS, mold recovery, and evidence-backed health optimization.',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://doseofproof.com',
+    siteName: 'Dose of Proof',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Dose of Proof — Documenting The Recovery',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dose of Proof | Not selling. Just proving.',
+    description: 'Documenting the actual terrain of CCI, MCAS, mold recovery, and evidence-backed health optimization.',
+    images: ['/og-image.png'],
+    creator: '@andrebrassfield',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

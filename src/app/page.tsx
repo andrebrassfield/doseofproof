@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
@@ -7,9 +8,49 @@ import { RevealStagger, RevealItem } from "@/components/ui/RevealStagger";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
-import { CheckCircle } from "@phosphor-icons/react";
 
 export default function Home() {
+  useEffect(() => {
+    let ctx: any;
+    (async () => {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger);
+
+      ctx = gsap.context(() => {
+        // Animate proof cards on scroll
+        gsap.utils.toArray('.proof-card').forEach((card: any) => {
+          gsap.fromTo(card, 
+            { opacity: 0, y: 60 },
+            {
+              opacity: 1, y: 0,
+              scrollTrigger: { trigger: card, start: 'top 85%', scrub: 1 },
+            }
+          );
+        });
+
+        // Animate X-ray scan — lock in place while text scrolls
+        gsap.to('.scan-lock', {
+          scrollTrigger: { trigger: '.scan-lock-container', start: 'top 20%', end: 'bottom bottom', scrub: true },
+          y: -100,
+          ease: 'none',
+        });
+
+        // Clinical diagram draw-on-scroll
+        gsap.utils.toArray('svg path').forEach((path: any) => {
+          try {
+            const length = path.getTotalLength();
+            gsap.fromTo(path,
+              { strokeDasharray: length, strokeDashoffset: length },
+              { strokeDashoffset: 0, scrollTrigger: { trigger: path, start: 'top 80%', scrub: 1 } }
+            );
+          } catch(e) {}
+        });
+      });
+    })();
+    return () => ctx?.revert();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -100,7 +141,8 @@ export default function Home() {
         </section>
 
         {/* THE PROBLEM SECTION */}
-        <section className="py-24 px-6 lg:px-12 bg-zinc-950 border-y border-white/5">
+        {/* THE PROBLEM SECTION */}
+        <section className="py-24 px-6 lg:px-12 bg-zinc-950 border-y border-white/5 scan-lock-container">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl tracking-tighter mb-6">The natural brake was broken.</h2>
@@ -116,7 +158,7 @@ export default function Home() {
                 </RevealItem>
               </RevealStagger>
             </div>
-            <div className="relative aspect-square md:aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50">
+            <div className="relative aspect-square md:aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50 scan-lock sticky top-[20%]">
               <Image 
                 src="/marketing-assets/scans/ap-xray.jpg"
                 alt="A-P Cervical X-Ray Mechanism Diagram"
@@ -153,7 +195,7 @@ export default function Home() {
               { title: "Minerals & NAD+", desc: "Terrain stabilization and cellular redox support.", iconId: "capsule" },
               { title: "Hydroxyzine", desc: "Managing the anxiety and MCAS overlap while the root heals.", iconId: "pill" },
             ].map((item, i) => (
-              <div key={i} className="w-[85vw] md:w-[400px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-8 flex flex-col shrink-0 group hover:border-white/20 transition-colors">
+              <div key={i} className="proof-card w-[85vw] md:w-[400px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-8 flex flex-col shrink-0 group hover:border-white/20 transition-colors">
                 <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-auto group-hover:bg-accent/10 transition-colors text-white group-hover:text-accent">
                   <BrandIcon id={item.iconId} className="w-6 h-6" />
                 </div>

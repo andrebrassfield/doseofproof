@@ -1,9 +1,34 @@
 "use client";
+import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setSuccess(true);
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      alert("Failed to submit.");
+    }
+    setLoading(false);
+  };
   return (
     <>
       <Navbar />
@@ -36,7 +61,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-8" onSubmit={handleSubmit}>
             
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-bold text-white block">Name</label>
@@ -44,9 +69,12 @@ export default function Contact() {
                 type="text" 
                 id="name"
                 name="name"
-                className="w-full h-12 bg-black border border-white/20 rounded-md px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                className="w-full h-12 bg-black border border-white/20 rounded-md px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all disabled:opacity-50"
                 placeholder="John Doe"
                 required
+                disabled={loading || success}
               />
             </div>
 
@@ -56,9 +84,12 @@ export default function Contact() {
                 type="email" 
                 id="email"
                 name="email"
-                className="w-full h-12 bg-black border border-white/20 rounded-md px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                className="w-full h-12 bg-black border border-white/20 rounded-md px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all disabled:opacity-50"
                 placeholder="john@example.com"
                 required
+                disabled={loading || success}
               />
             </div>
 
@@ -68,14 +99,17 @@ export default function Contact() {
                 id="message"
                 name="message"
                 rows={6}
-                className="w-full bg-black border border-white/20 rounded-md p-4 text-white placeholder:text-white/30 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-y"
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                className="w-full bg-black border border-white/20 rounded-md p-4 text-white placeholder:text-white/30 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-y disabled:opacity-50"
                 placeholder="Tell me what's going on..."
                 required
+                disabled={loading || success}
               ></textarea>
             </div>
 
-            <Button size="lg" className="w-full md:w-auto rounded-md">
-              Send Message
+            <Button size="lg" className="w-full md:w-auto rounded-md" disabled={loading || success}>
+              {loading ? "Sending..." : success ? "Message Sent!" : "Send Message"}
             </Button>
             
           </form>
