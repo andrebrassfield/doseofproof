@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <style>
+      @keyframes scanSweep {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+      }
+      @keyframes pulseGlow {
+        0%, 100% { r: 20; opacity: 0.3; }
+        50% { r: 30; opacity: 0.1; }
+      }
+      @keyframes fadeInReveal {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      .scan-line {
+        stroke: #C8FF00;
+        stroke-width: 2;
+        animation: scanSweep 2s linear infinite;
+        filter: drop-shadow(0 0 8px #C8FF00);
+      }
+      .pulse-ring {
+        fill: none;
+        stroke: #C8FF00;
+        stroke-width: 2;
+        animation: pulseGlow 1.5s ease-in-out infinite;
+      }
+      .reveal-text {
+        fill: #FFFFFF;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        animation: fadeInReveal 1s ease-out forwards;
+      }
+    </style>
+  </defs>
+
+  <!-- OVERLAY 1: Scan Line Animation -->
+  <g id="scan-line-animation" transform="translate(50, 50)">
+    <rect x="0" y="0" width="300" height="300" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    <line class="scan-line" x1="0" y1="0" x2="300" y2="0"/>
+    <text x="120" y="150" class="reveal-text" opacity="0.5">SCANNING...</text>
+  </g>
+
+  <!-- OVERLAY 2: Pulse/Glow Ring on Key Metrics -->
+  <g id="pulse-ring-overlay" transform="translate(450, 50)">
+    <!-- Background -->
+    <rect x="0" y="0" width="300" height="300" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    
+    <!-- Metric box -->
+    <rect x="50" y="100" width="200" height="100" fill="none" stroke="#C8FF00" stroke-width="2" rx="4"/>
+    <text x="80" y="135" fill="#FFFFFF" font-family="Arial" font-size="14">INFLAMMATION</text>
+    <text x="100" y="165" fill="#C8FF00" font-family="Arial" font-size="24" font-weight="bold">-86%</text>
+    
+    <!-- Pulse rings around metric -->
+    <circle cx="150" cy="150" class="pulse-ring"/>
+    <circle cx="150" cy="150" class="pulse-ring" style="animation-delay: 0.5s;"/>
+    <circle cx="150" cy="150" class="pulse-ring" style="animation-delay: 1s;"/>
+  </g>
+
+  <!-- OVERLAY 3: Fade-In Reveal for Section Headers -->
+  <g id="fade-in-reveal" transform="translate(850, 50)">
+    <rect x="0" y="0" width="300" height="300" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    
+    <!-- Section header with staggered reveal -->
+    <text x="20" y="80" class="reveal-text" style="animation-delay: 0s;">DOSE</text>
+    <text x="20" y="130" class="reveal-text" style="animation-delay: 0.2s;">OF</text>
+    <text x="20" y="180" class="reveal-text" style="animation-delay: 0.4s;">PROOF</text>
+    
+    <!-- Accent line -->
+    <line x1="20" y1="200" x2="280" y2="200" stroke="#C8FF00" stroke-width="2" class="reveal-text" style="animation-delay: 0.6s;"/>
+  </g>
+
+  <!-- OVERLAY 4: Scan Line Variant (Horizontal) -->
+  <g id="scan-line-horizontal" transform="translate(50, 200)">
+    <rect x="0" y="0" width="300" height="150" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    <line class="scan-line" x1="0" y1="0" x2="0" y2="150" style="animation: scanSweep 3s linear infinite; transform-origin: 0 75px;"/>
+    <text x="80" y="80" fill="#C8FF00" font-family="Arial" font-size="14" opacity="0.6">Analyzing...</text>
+  </g>
+
+  <!-- OVERLAY 5: Multiple Pulse Rings (Data Points) -->
+  <g id="multiple-pulses" transform="translate(450, 200)">
+    <rect x="0" y="0" width="300" height="150" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    
+    <!-- Data point 1 -->
+    <circle cx="50" cy="50" r="8" fill="#C8FF00"/>
+    <circle cx="50" cy="50" class="pulse-ring" r="15"/>
+    <circle cx="50" cy="50" class="pulse-ring" r="15" style="animation-delay: 0.5s;"/>
+    
+    <!-- Data point 2 -->
+    <circle cx="150" cy="75" r="8" fill="#C8FF00"/>
+    <circle cx="150" cy="75" class="pulse-ring" r="15"/>
+    <circle cx="150" cy="75" class="pulse-ring" r="15" style="animation-delay: 0.3s;"/>
+    
+    <!-- Data point 3 -->
+    <circle cx="250" cy="50" r="8" fill="#C8FF00"/>
+    <circle cx="250" cy="50" class="pulse-ring" r="15"/>
+    <circle cx="250" cy="50" class="pulse-ring" r="15" style="animation-delay: 0.7s;"/>
+    
+    <!-- Connecting lines -->
+    <line x1="50" y1="50" x2="150" y2="75" stroke="#C8FF00" stroke-width="1" opacity="0.5"/>
+    <line x1="150" y1="75" x2="250" y2="50" stroke="#C8FF00" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- OVERLAY 6: Typewriter Effect (Text Reveal) -->
+  <g id="typewriter-effect" transform="translate(850, 200)">
+    <rect x="0" y="0" width="300" height="150" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    
+    <!-- Text that appears character by character -->
+    <text x="20" y="50" fill="#FFFFFF" font-family="Arial" font-size="12">
+      <tspan class="reveal-text" style="animation-delay: 0s;">T</tspan><tspan class="reveal-text" style="animation-delay: 0.1s;">h</tspan><tspan class="reveal-text" style="animation-delay: 0.2s;">i</tspan><tspan class="reveal-text" style="animation-delay: 0.3s;">s</tspan><tspan class="reveal-text" style="animation-delay: 0.4s;"> </tspan><tspan class="reveal-text" style="animation-delay: 0.5s;">i</tspan><tspan class="reveal-text" style="animation-delay: 0.6s;">s</tspan>
+    </text>
+    <text x="20" y="80" fill="#FFFFFF" font-family="Arial" font-size="12">
+      <tspan class="reveal-text" style="animation-delay: 0.7s;">m</tspan><tspan class="reveal-text" style="animation-delay: 0.8s;">y</tspan><tspan class="reveal-text" style="animation-delay: 0.9s;"> </tspan><tspan class="reveal-text" style="animation-delay: 1s;">e</tspan><tspan class="reveal-text" style="animation-delay: 1.1s;">x</tspan><tspan class="reveal-text" style="animation-delay: 1.2s;">p</tspan><tspan class="reveal-text" style="animation-delay: 1.3s;">e</tspan><tspan class="reveal-text" style="animation-delay: 1.4s;">r</tspan><tspan class="reveal-text" style="animation-delay: 1.5s;">i</tspan><tspan class="reveal-text" style="animation-delay: 1.6s;">e</tspan><tspan class="reveal-text" style="animation-delay: 1.7s;">n</tspan><tspan class="reveal-text" style="animation-delay: 1.8s;">c</tspan><tspan class="reveal-text" style="animation-delay: 1.9s;">e</tspan><tspan class="reveal-text" style="animation-delay: 2s;">.</tspan>
+    </text>
+  </g>
+
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <style>
+      .accent-lime { stroke: #C8FF00; fill: none; }
+      .accent-lime-fill { fill: #C8FF00; }
+      .text-white { fill: #FFFFFF; font-family: Arial, sans-serif; }
+    </style>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- DIVIDER 1: Horizontal Section Divider with Glow -->
+  <g id="divider-horizontal" transform="translate(0, 50)">
+    <line class="accent-lime" x1="0" y1="20" x2="400" y2="20" stroke-width="2" filter="url(#glow)"/>
+    <circle class="accent-lime-fill" cx="200" cy="20" r="3" filter="url(#glow)"/>
+  </g>
+
+  <!-- DIVIDER 2: Large Opening Quotation Mark -->
+  <g id="quote-mark" transform="translate(500, 0)">
+    <text x="0" y="60" font-size="80" font-weight="bold" class="accent-lime-fill" opacity="0.3">"</text>
+  </g>
+
+  <!-- DIVIDER 3: Three Lime Dots Section Break -->
+  <g id="three-dots" transform="translate(900, 40)">
+    <circle class="accent-lime-fill" cx="0" cy="0" r="4"/>
+    <circle class="accent-lime-fill" cx="20" cy="0" r="4"/>
+    <circle class="accent-lime-fill" cx="40" cy="0" r="4"/>
+  </g>
+
+  <!-- DIVIDER 4: Footer Separator with Wordmark -->
+  <g id="footer-separator" transform="translate(0, 150)">
+    <line class="accent-lime" x1="0" y1="0" x2="400" y2="0" stroke-width="1.5"/>
+    <text x="0" y="30" font-size="12" font-weight="bold" class="text-white" letter-spacing="2">DOSE OF PROOF</text>
+    <line class="accent-lime" x1="0" y1="40" x2="400" y2="40" stroke-width="1.5"/>
+  </g>
+
+  <!-- DIVIDER 5: Corner Accent Brackets -->
+  <g id="corner-brackets-tl" transform="translate(500, 150)">
+    <!-- Top-left bracket -->
+    <path class="accent-lime" d="M 0 0 L 20 0 L 20 20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Top-right bracket -->
+    <path class="accent-lime" d="M 80 0 L 60 0 L 60 20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Bottom-left bracket -->
+    <path class="accent-lime" d="M 0 80 L 20 80 L 20 60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Bottom-right bracket -->
+    <path class="accent-lime" d="M 80 80 L 60 80 L 60 60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Center content -->
+    <text x="25" y="50" font-size="14" font-weight="bold" class="text-white">PROOF</text>
+  </g>
+
+  <!-- DIVIDER 6: Vertical Line with Accent -->
+  <g id="vertical-divider" transform="translate(900, 150)">
+    <line class="accent-lime" x1="0" y1="0" x2="0" y2="80" stroke-width="2"/>
+    <circle class="accent-lime-fill" cx="0" cy="40" r="4"/>
+  </g>
+
+  <!-- DIVIDER 7: Wavy Line Separator -->
+  <g id="wavy-separator" transform="translate(0, 300)">
+    <path class="accent-lime" d="M 0 20 Q 10 10 20 20 T 40 20 T 60 20 T 80 20 T 100 20 T 120 20 T 140 20 T 160 20 T 180 20 T 200 20" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- DIVIDER 8: Accent Line with Fade -->
+  <g id="fade-line" transform="translate(300, 300)">
+    <line x1="0" y1="20" x2="200" y2="20" stroke="#C8FF00" stroke-width="2" opacity="1"/>
+    <line x1="200" y1="20" x2="300" y2="20" stroke="#C8FF00" stroke-width="2" opacity="0.5"/>
+    <line x1="300" y1="20" x2="400" y2="20" stroke="#C8FF00" stroke-width="2" opacity="0.2"/>
+  </g>
+
+  <!-- DIVIDER 9: Medical Cross Accent -->
+  <g id="medical-cross" transform="translate(700, 280)">
+    <rect x="8" y="2" width="8" height="20" class="accent-lime-fill"/>
+    <rect x="2" y="8" width="20" height="8" class="accent-lime-fill"/>
+  </g>
+
+  <!-- DIVIDER 10: Proof Badge Accent -->
+  <g id="proof-badge" transform="translate(900, 300)">
+    <circle cx="20" cy="20" r="18" class="accent-lime" stroke-width="2"/>
+    <path d="M 15 20 L 18 23 L 25 16" class="accent-lime" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+</svg>

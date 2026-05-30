@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 80">
+  <style>
+    .logo-icon { stroke: #C8FF00; stroke-width: 2; fill: none; }
+  </style>
+  <g transform="translate(0, 0)">
+    <!-- Pill shape -->
+    <ellipse cx="15" cy="30" rx="6" ry="12" class="logo-icon"/>
+    <ellipse cx="30" cy="30" rx="6" ry="12" class="logo-icon"/>
+    <rect x="15" y="18" width="15" height="24" class="logo-icon"/>
+    
+    <!-- Checkmark -->
+    <path d="M 10 35 L 16 42 L 32 20" class="logo-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>
