@@ -77,7 +77,7 @@ export default async function DoctorsMissGuidePage() {
               <div className="flex flex-col items-center gap-6">
                 <div className="text-4xl font-bold text-white">$47</div>
                 <LemonsqueezyEmbed 
-                  url="https://doseofproof.lemonsqueezy.com/checkout/buy/placeholder-variant-id" 
+                  url="https://app.lemonsqueezy.com/checkout/buy/PLACEHOLDER-doctors-miss-guide" 
                   label="Buy Now — $47"
                   className="inline-flex items-center justify-center h-14 px-8 text-lg font-medium text-black bg-white rounded-lg hover:bg-accent transition-colors"
                 />

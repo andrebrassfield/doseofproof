@@ -86,7 +86,7 @@ export default function VaultPage() {
               </ul>
               
               <LemonsqueezyEmbed 
-                url="https://doseofproof.lemonsqueezy.com/checkout/buy/placeholder-monthly" 
+                url="https://app.lemonsqueezy.com/checkout/buy/PLACEHOLDER-vault-monthly" 
                 label="Subscribe Monthly"
                 className="w-full h-14 flex items-center justify-center bg-accent text-black font-bold rounded-lg hover:bg-white transition-colors mt-auto text-lg"
               />
@@ -116,7 +116,7 @@ export default function VaultPage() {
               </ul>
               
               <LemonsqueezyEmbed 
-                url="https://doseofproof.lemonsqueezy.com/checkout/buy/placeholder-annual" 
+                url="https://app.lemonsqueezy.com/checkout/buy/PLACEHOLDER-vault-annual" 
                 label="Subscribe Annually"
                 className="w-full h-12 flex items-center justify-center bg-white text-black font-bold rounded-lg hover:bg-accent transition-colors mt-auto"
               />

@@ -127,7 +127,7 @@ export default function IntakePage() {
               </p>
               
               {/* Calendly Inline Widget */}
-              <div className="calendly-inline-widget" data-url="https://calendly.com/placeholder-consultation" style={{ minWidth: '320px', height: '700px' }}></div>
+              <div className="calendly-inline-widget" data-url="https://calendly.com/doseofproof/consultation" style={{ minWidth: '320px', height: '700px' }}></div>
               <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             </div>
           )}

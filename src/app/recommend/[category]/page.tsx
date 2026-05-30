@@ -124,6 +124,7 @@ export default async function RecommendCategoryPage({ params }: { params: Promis
                       href={product.link}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-affiliate={product.brand.toLowerCase().replace(/[^a-z0-9]/g, '-')}
                       className="inline-flex items-center justify-center h-10 px-6 text-sm font-bold text-black bg-white rounded-lg hover:bg-accent transition-colors shrink-0"
                     >
                       View Source

@@ -56,6 +56,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script src="https://cdn.usefathom.com/script.js" data-site="YOUR_FATHOM_SITE_ID" defer />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

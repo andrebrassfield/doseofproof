@@ -84,7 +84,7 @@ export default function MoldDetoxProgram() {
                 <div className="text-4xl font-bold text-white mb-2">$197</div>
                 <p className="text-sm text-muted mb-6">One-time payment.</p>
                 <LemonsqueezyEmbed 
-                  url="https://doseofproof.lemonsqueezy.com/checkout/buy/placeholder-mold-variant" 
+                  url="https://app.lemonsqueezy.com/checkout/buy/PLACEHOLDER-30-day-course" 
                   label="Enroll Now"
                   className="inline-flex w-full items-center justify-center h-14 px-8 text-lg font-medium text-black bg-white rounded-lg hover:bg-accent transition-colors"
                 />
