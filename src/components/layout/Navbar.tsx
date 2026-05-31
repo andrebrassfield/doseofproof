@@ -17,8 +17,17 @@ export function Navbar() {
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
           <Link href="/about" className="hover:text-accent transition-colors">About</Link>
+          <Link href="/blogs" className="hover:text-accent transition-colors">Blog</Link>
+          <div className="relative group">
+            <span className="hover:text-accent transition-colors cursor-pointer py-2">Products</span>
+            <div className="absolute top-full left-0 mt-2 w-48 bg-zinc-950 border border-white/10 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col py-2 z-50">
+              <Link href="/products/what-doctors-miss" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Testing Guide</Link>
+              <Link href="/products/mold-detox" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Mold Detox Course</Link>
+              <Link href="/products/peptide-database" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Peptide Database</Link>
+            </div>
+          </div>
           <Link href="/content" className="hover:text-accent transition-colors">Content</Link>
-          <Link href="/lead-magnet" className="hover:text-accent transition-colors">The First 30 Days</Link>
+          <a href="https://shop.doseofproof.com" className="text-accent hover:text-accent/80 transition-colors">Shop</a>
         </nav>
         <div className="flex items-center gap-4 relative z-50">
           <Button href="/contact" variant="ghost" className="hidden md:inline-flex">Contact</Button>
@@ -46,8 +55,15 @@ export function Navbar() {
           <nav className="flex flex-col items-center gap-8 text-2xl font-bold text-white w-full">
             <Link href="/" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Home</Link>
             <Link href="/about" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">About</Link>
+            <Link href="/blogs" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Blog</Link>
+            <div className="flex flex-col items-center gap-4 text-xl text-white/60">
+              <span className="text-white">Products</span>
+              <Link href="/products/what-doctors-miss" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Testing Guide</Link>
+              <Link href="/products/mold-detox" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Mold Detox Course</Link>
+              <Link href="/products/peptide-database" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Peptide Database</Link>
+            </div>
             <Link href="/content" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Content</Link>
-            <Link href="/lead-magnet" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">The First 30 Days</Link>
+            <a href="https://shop.doseofproof.com" onClick={() => setIsOpen(false)} className="text-accent hover:text-accent/80 transition-colors">Shop</a>
             <Link href="/contact" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Contact</Link>
             <div className="w-full max-w-xs h-px bg-white/10 my-4" />
             <Button href="/lead-magnet" className="w-full max-w-xs" onClick={() => setIsOpen(false)}>Get Checklist</Button>

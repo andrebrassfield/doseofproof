@@ -80,6 +80,40 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <MDXRemote source={article.content} components={components} />
           </div>
 
+          {/* Shop CTA Banner */}
+          <div className="mt-16 bg-zinc-900 border border-white/10 p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div>
+              <h3 className="text-xl font-bold text-white mb-2">Shop the Protocol</h3>
+              <p className="text-muted text-sm max-w-md">
+                Get the exact supplements, peptides, and advanced testing guides I use to maintain remission.
+              </p>
+            </div>
+            <a href="https://shop.doseofproof.com" className="inline-flex h-12 items-center justify-center rounded-lg bg-white px-8 text-sm font-bold text-black transition-colors hover:bg-white/90 shrink-0">
+              Visit Store →
+            </a>
+          </div>
+
+          {/* Medical Disclaimer */}
+          <div className="mt-16 p-6 border border-red-500/20 rounded-xl bg-red-500/5">
+            <div className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-red-500 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <use href="/svgs/icons/proof-icons.svg#warning" />
+              </svg>
+              <div>
+                <h3 className="text-sm font-bold text-white mb-1">
+                  Medical Disclaimer
+                </h3>
+                <p className="text-xs text-muted">
+                  This website documents my personal experience. I am not a
+                  doctor. The information shared here is not medical advice and
+                  is not intended to diagnose, treat, cure, or prevent any
+                  disease. Always consult your physician before starting any new
+                  treatment.
+                </p>
+              </div>
+            </div>
+          </div>
+
         </article>
       </main>
       <Footer />

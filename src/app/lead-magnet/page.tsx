@@ -115,6 +115,21 @@ export default function LeadMagnet() {
           </div>
 
         </div>
+        
+        {/* Shop CTA Banner */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-32 relative z-10">
+          <div className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-2">Want the full protocol?</h2>
+              <p className="text-muted text-lg max-w-xl">
+                Skip the guesswork. Get the exact supplements, peptides, and advanced testing guides I use to maintain remission.
+              </p>
+            </div>
+            <Button href="https://shop.doseofproof.com" size="lg" className="shrink-0">
+              Shop the Protocol →
+            </Button>
+          </div>
+        </div>
       </main>
       <Footer />
     </>

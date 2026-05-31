@@ -4,6 +4,17 @@ import matter from 'gray-matter';
 
 const articlesDirectory = path.join(process.cwd(), 'src/content/articles');
 
+export type FAQ = {
+  question: string;
+  answer: string;
+};
+
+export type AffiliateProduct = {
+  name: string;
+  url: string;
+  description?: string;
+};
+
 export type ArticleMeta = {
   title: string;
   description: string;
@@ -11,12 +22,30 @@ export type ArticleMeta = {
   readTime: number;
   publishedAt: string;
   slug: string;
+  keywords?: string[];
+  faqs?: FAQ[];
+  affiliateProducts?: AffiliateProduct[];
 };
 
 export type Article = {
   meta: ArticleMeta;
   content: string;
 };
+
+// Category display names and slugs
+export const CATEGORIES: Record<string, string> = {
+  'peptides': 'Peptides',
+  'mold-recovery': 'Mold Recovery',
+  'cci': 'CCI & Upper Cervical',
+  'mcas': 'MCAS & Histamine',
+  'protocols': 'Protocols',
+  'supplements': 'Supplements',
+};
+
+function estimateReadTime(content: string): number {
+  const words = content.split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 250));
+}
 
 export function getArticleSlugs() {
   if (!fs.existsSync(articlesDirectory)) return [];
@@ -39,9 +68,12 @@ export function getArticleBySlug(slug: string): Article | null {
       title: data.title || '',
       description: data.description || '',
       category: data.category || '',
-      readTime: data.readTime || 0,
-      publishedAt: data.publishedAt || '',
+      readTime: data.readTime || estimateReadTime(content),
+      publishedAt: data.publishedAt || data.date || '',
       slug: realSlug,
+      keywords: data.keywords || [],
+      faqs: data.faqs || [],
+      affiliateProducts: data.affiliateProducts || [],
     },
     content,
   };
@@ -54,4 +86,37 @@ export function getAllArticles(): Article[] {
     .filter((article): article is Article => article !== null)
     .sort((a, b) => (a.meta.publishedAt > b.meta.publishedAt ? -1 : 1));
   return articles;
+}
+
+export function getArticlesByCategory(category: string): Article[] {
+  return getAllArticles().filter(
+    (article) => article.meta.category === category
+  );
+}
+
+export function getCategories(): { slug: string; name: string; count: number }[] {
+  const articles = getAllArticles();
+  const categoryCounts: Record<string, number> = {};
+
+  articles.forEach((article) => {
+    const cat = article.meta.category;
+    if (cat) {
+      categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+    }
+  });
+
+  return Object.entries(CATEGORIES)
+    .filter(([slug]) => categoryCounts[slug] && categoryCounts[slug] > 0)
+    .map(([slug, name]) => ({
+      slug,
+      name,
+      count: categoryCounts[slug] || 0,
+    }));
+}
+
+export function getRelatedArticles(currentSlug: string, category: string, limit: number = 3): Article[] {
+  return getAllArticles()
+    .filter((a) => a.meta.slug !== currentSlug)
+    .filter((a) => a.meta.category === category)
+    .slice(0, limit);
 }

@@ -29,15 +29,22 @@ export function Footer() {
         <div className="flex flex-col md:flex-row gap-8 md:gap-16">
           <div className="flex flex-col gap-4">
             <Link href="/about" className="text-sm font-medium text-white/80 hover:text-accent">About Dre</Link>
+            <Link href="/blogs" className="text-sm font-medium text-white/80 hover:text-accent">Blog</Link>
             <Link href="/content" className="text-sm font-medium text-white/80 hover:text-accent">Articles</Link>
             <Link href="/contact" className="text-sm font-medium text-white/80 hover:text-accent">Contact</Link>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Link href="/privacy" className="text-sm font-medium text-white/80 hover:text-accent">Privacy Policy</Link>
+            <Link href="/terms" className="text-sm font-medium text-white/80 hover:text-accent">Terms of Service</Link>
+            <Link href="/affiliate-disclosure" className="text-sm font-medium text-white/80 hover:text-accent">Affiliate Disclosure</Link>
+            <Link href="/medical-disclaimer" className="text-sm font-medium text-white/80 hover:text-accent">Medical Disclaimer</Link>
           </div>
         </div>
       </div>
       <div className="relative z-10 max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted">
         <p>© {new Date().getFullYear()} Dose of Proof. All rights reserved.</p>
         <p className="italic max-w-md text-center md:text-right">
-          This is my experience. Not medical advice. Always consult a professional before starting any protocol.
+          This is my experience. Not medical advice. This site contains affiliate links — I may earn a commission at no extra cost to you.
         </p>
       </div>
     </footer>
