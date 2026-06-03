@@ -100,13 +100,13 @@ export default function Home() {
                 </svg>
              </div>
              <div className="absolute inset-0 pointer-events-none z-20 scan-line-bg" />
-             <Image 
-               src="/marketing-assets/images/hero/hero-dark-dna-watermark-1920x1080.png"
-               alt="Dark DNA Watermark Background"
-               fill
-               sizes="50vw"
-               className="object-cover opacity-70 mix-blend-luminosity grayscale"
-               priority
+             <div
+               aria-hidden="true"
+               className="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-luminosity grayscale"
+               style={{
+                 backgroundImage:
+                   "url('/marketing-assets/images/hero/hero-dark-dna-watermark-1920x1080.png')",
+               }}
              />
              <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10" />
           </div>
