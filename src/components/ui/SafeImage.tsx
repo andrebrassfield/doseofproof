@@ -9,9 +9,14 @@ interface SafeImageProps extends Omit<ImageProps, "onLoad"> {
 
 export function SafeImage({ wrapperClassName = "", className = "", ...props }: SafeImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const isFill = !!props.fill;
 
   return (
-    <div className={`relative overflow-hidden bg-zinc-900/40 ${!isLoaded ? "animate-pulse" : ""} ${wrapperClassName}`}>
+    <div
+      className={`${
+        isFill ? "absolute inset-0 w-full h-full" : "relative"
+      } overflow-hidden bg-zinc-900/40 ${!isLoaded ? "animate-pulse" : ""} ${wrapperClassName}`}
+    >
       <Image
         {...props}
         onLoad={() => setIsLoaded(true)}
