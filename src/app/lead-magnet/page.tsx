@@ -42,7 +42,7 @@ export default function LeadMagnet() {
           <div className="flex-1 w-full max-w-xl">
              <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-accent/5">
                 <Image 
-                  src="/marketing-assets/images/lead-magnet/page-1-cover.png"
+                  src="/marketing-assets/images/lead-magnet/checklist-cover-standalone.png"
                   alt="The First 30 Days Mold Detox Checklist Cover"
                   fill
                   className="object-cover"
