@@ -195,7 +195,7 @@ export default function About() {
                 <div className="border border-white/10 p-8 rounded-2xl bg-black/40 flex flex-col sm:flex-row gap-6 items-center">
                   <div className="relative w-20 h-28 shrink-0 rounded-lg overflow-hidden border border-white/20 shadow-lg bg-zinc-900">
                     <Image 
-                      src="/marketing-assets/images/lead-magnet/checklist-cover-standalone.png"
+                      src="/marketing-assets/lead_magnet_card.png"
                       alt="Checklist Cover"
                       fill
                       className="object-cover"
