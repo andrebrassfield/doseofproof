@@ -99,10 +99,10 @@ export default function Home() {
              </div>
              <div className="absolute inset-0 pointer-events-none z-20 scan-line-bg" />
              <Image 
-               src="/marketing-assets/scans/tytron-scan.png"
-               alt="TyTron Paraspinal infrared scan"
+               src="/marketing-assets/images/hero/hero-dark-dna-watermark-1920x1080.png"
+               alt="Dark DNA Watermark Background"
                fill
-               className="object-cover opacity-80 mix-blend-luminosity grayscale"
+               className="object-cover opacity-70 mix-blend-luminosity grayscale"
                priority
              />
              <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10" />
@@ -110,8 +110,17 @@ export default function Home() {
         </section>
 
         {/* THE PROOF SECTION */}
-        <section className="py-24 px-6 lg:px-12 bg-background">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-24 px-6 lg:px-12 bg-background relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <Image 
+              src="/marketing-assets/images/hero/section-the-proof-1920x600.png"
+              alt="Section The Proof Background"
+              fill
+              className="object-cover opacity-30 mix-blend-luminosity grayscale"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+          </div>
+          <div className="max-w-7xl mx-auto relative z-10">
             <div className="mb-16">
               <h2 className="text-4xl md:text-5xl tracking-tighter mb-4">The Proof.</h2>
               <p className="text-muted max-w-2xl">Not just how I feel. The actual, verified data showing mechanical failure and toxic burden.</p>
@@ -125,7 +134,7 @@ export default function Home() {
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -136,7 +145,7 @@ export default function Home() {
                 className="md:col-span-1 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -147,7 +156,7 @@ export default function Home() {
                 className="md:col-span-1 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -158,7 +167,7 @@ export default function Home() {
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />

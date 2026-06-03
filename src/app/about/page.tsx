@@ -111,20 +111,26 @@ export default function About() {
                 X-rays and TyTron paraspinal infrared scans confirmed the structural root: <strong><Link href="/blogs/cci/craniocervical-instability-explained" className="text-white hover:text-accent underline transition-colors">craniocervical instability (CCI)</Link></strong> at C1-C2 with a complete loss of the normal cervical curve. My upper neck was physically compressing my <strong>vagus nerve</strong>, knocking out the body’s natural brake on inflammation—a process well-documented in clinical research on the cholinergic anti-inflammatory reflex (see <a href="https://pubmed.ncbi.nlm.nih.gov/12490958/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-mono text-sm">[Nature 2002]</a> and Hauser's work on cervical autonomic dysfunction <a href="https://pubmed.ncbi.nlm.nih.gov/25685246/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-mono text-sm">[Hauser et al., 2015]</a>). Suspected <strong><Link href="/blogs/protocols/doctors-miss-series" className="text-white hover:text-accent underline transition-colors">hypermobile Ehlers-Danlos Syndrome (hEDS)</Link></strong> explained the ligament laxity allowing all this mechanical chaos.
               </p>
 
-              <div className="my-10 relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900/50 border border-white/10">
-                <svg className="absolute inset-0 w-full h-full mix-blend-screen opacity-80" viewBox="500 0 500 320">
-                  <use href="/svgs/diagrams/clinical-diagrams.svg#cci-anatomy" />
-                </svg>
+              <div className="my-10 relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-white/10">
+                <Image 
+                  src="/marketing-assets/images/personal-proof/systemic-view-diagram.png"
+                  alt="Systemic View of CCI Anatomy"
+                  fill
+                  className="object-cover opacity-90"
+                />
               </div>
 
               <p>
                 On top of the structural collapse, my environment had turned against me. I was experiencing <strong><Link href="/blogs/mcas/mcas-treatment-protocol-2026" className="text-white hover:text-accent underline transition-colors">mast cell activation (MCAS)</Link></strong>—a relentless cascade of histamine, leukotrienes, and downstream inflammatory signals—amplified by years of living in a toxic, moldy house.
               </p>
 
-              <div className="my-10 relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900/50 border border-white/10">
-                <svg className="absolute inset-0 w-full h-full mix-blend-screen opacity-80" viewBox="0 0 500 320">
-                  <use href="/svgs/diagrams/clinical-diagrams.svg#mold-flowchart" />
-                </svg>
+              <div className="my-10 relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-white/10">
+                <Image 
+                  src="/marketing-assets/images/personal-proof/mold-timeline-landscape.png"
+                  alt="Mold Exposure Timeline"
+                  fill
+                  className="object-cover opacity-90"
+                />
               </div>
 
               <div className="w-full h-1 mt-12 mb-8 text-accent/50">
@@ -250,11 +256,8 @@ export default function About() {
             </div>
 
             <div className="w-full md:w-64 shrink-0 flex flex-col gap-6">
-               <div className="relative aspect-[3/4] rounded-xl overflow-hidden grayscale contrast-125 bg-black border border-white/10">
-                 <Image src="/marketing-assets/scans/tytron-scan.png" alt="Dre's TyTron Scan" fill className="object-contain opacity-90" />
-               </div>
-               <div className="relative aspect-[3/4] rounded-xl overflow-hidden grayscale contrast-125 bg-black border border-white/10">
-                 <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Dre's X-ray" fill className="object-contain opacity-90" />
+               <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-black border border-white/10">
+                 <Image src="/marketing-assets/images/personal-proof/combined-scans.png" alt="Combined Scans" fill className="object-cover opacity-90 grayscale hover:grayscale-0 transition-all duration-500" />
                </div>
                <p className="text-xs text-muted mb-4">
                  Actual scans and X-rays confirming C1-C2 craniocervical instability. The data tells the truth.

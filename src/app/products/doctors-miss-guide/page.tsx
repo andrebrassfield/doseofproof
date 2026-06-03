@@ -47,7 +47,7 @@ export default async function DoctorsMissGuidePage() {
             </p>
           </div>
 
-          <div className="relative aspect-video rounded-2xl overflow-hidden mb-16 border border-white/10 shadow-2xl shadow-accent/5">
+          <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl overflow-hidden mb-16 border border-white/10 shadow-2xl shadow-accent/5">
             <Image 
               src="/marketing-assets/what_doctors_miss_card.png" 
               alt="What Doctors Miss Guide Cover" 
