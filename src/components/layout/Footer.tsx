@@ -23,9 +23,11 @@ export function Footer() {
         </div>
         <div className="flex flex-col md:flex-row gap-8 md:gap-16">
           <div className="flex flex-col gap-4">
+            <Link href="/start-here" className="text-sm font-medium text-white/80 hover:text-accent">Start Here</Link>
+            <Link href="/testing-roadmap" className="text-sm font-medium text-white/80 hover:text-accent">Testing Roadmap</Link>
+            <Link href="/protocol-vault" className="text-sm font-medium text-white/80 hover:text-accent">Protocol Vault</Link>
             <Link href="/about" className="text-sm font-medium text-white/80 hover:text-accent">About Dre</Link>
             <Link href="/blogs" className="text-sm font-medium text-white/80 hover:text-accent">Blog</Link>
-            <Link href="/content" className="text-sm font-medium text-white/80 hover:text-accent">Articles</Link>
             <Link href="/contact" className="text-sm font-medium text-white/80 hover:text-accent">Contact</Link>
           </div>
           <div className="flex flex-col gap-4">
