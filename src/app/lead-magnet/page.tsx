@@ -45,6 +45,7 @@ export default function LeadMagnet() {
                alt="The First 30 Days Mold Detox Checklist Cover"
                width={1080}
                height={1350}
+               sizes="(min-width: 768px) 50vw, 100vw"
                wrapperClassName="rounded-2xl border border-white/20 shadow-2xl shadow-accent/5 w-full"
                className="w-full h-auto"
                priority

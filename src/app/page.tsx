@@ -14,10 +14,12 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const searchParams = new URLSearchParams(window.location.search);
-      setHeroVariant(searchParams.get("hero"));
+      window.requestAnimationFrame(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        setHeroVariant(searchParams.get("hero"));
+      });
     }
-    
+
     let ctx: any;
     (async () => {
       const { gsap } = await import('gsap');
@@ -102,6 +104,7 @@ export default function Home() {
                src="/marketing-assets/images/hero/hero-dark-dna-watermark-1920x1080.png"
                alt="Dark DNA Watermark Background"
                fill
+               sizes="50vw"
                className="object-cover opacity-70 mix-blend-luminosity grayscale"
                priority
              />
@@ -116,6 +119,7 @@ export default function Home() {
               src="/marketing-assets/images/hero/section-the-proof-1920x600.png"
               alt="Section The Proof Background"
               fill
+              sizes="100vw"
               className="object-cover opacity-30 mix-blend-luminosity grayscale"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
@@ -134,7 +138,7 @@ export default function Home() {
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill sizes="(min-width: 768px) 66vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -145,7 +149,7 @@ export default function Home() {
                 className="md:col-span-1 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -156,7 +160,7 @@ export default function Home() {
                 className="md:col-span-1 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -167,7 +171,7 @@ export default function Home() {
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill sizes="(min-width: 768px) 66vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -198,6 +202,7 @@ export default function Home() {
                 src="/marketing-assets/scans/ap-xray.jpg"
                 alt="A-P Cervical X-Ray Mechanism Diagram"
                 fill
+                sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center opacity-80 mix-blend-luminosity grayscale hover:grayscale-0 hover:mix-blend-normal transition-all duration-700"
               />
             </div>
@@ -218,6 +223,7 @@ export default function Home() {
                 src="/marketing-assets/images/personal-proof/systemic-view-diagram.png"
                 alt="Systemic View: Vagus Nerve and C1-C2 Anatomy"
                 fill
+                sizes="(min-width: 768px) 600px, 85vw"
                 className="object-cover opacity-80 grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent z-10" />
@@ -264,6 +270,7 @@ export default function Home() {
                     src={item.image} 
                     alt={item.title} 
                     fill 
+                    sizes="(min-width: 768px) 400px, 85vw"
                     className="object-cover grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700" 
                   />
                   <div className="absolute top-3 left-3 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:text-accent group-hover:border-accent/30 transition-colors">

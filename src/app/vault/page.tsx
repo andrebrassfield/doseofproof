@@ -239,6 +239,7 @@ export default function VaultPage() {
                     src="/marketing-assets/images/personal-proof/combined-scans.png" 
                     alt="Dre's C1-C2 Instability Cervical X-ray and TyTron Scan findings" 
                     fill 
+                    sizes="(min-width: 1024px) 33vw, 100vw"
                     className="object-contain" 
                   />
                 </div>
@@ -257,6 +258,7 @@ export default function VaultPage() {
                     src="/marketing-assets/images/personal-proof/protocol-infographic-landscape.png" 
                     alt="Protocol root cause restoration details infographic" 
                     fill 
+                    sizes="(min-width: 1024px) 33vw, 100vw"
                     className="object-contain" 
                   />
                 </div>

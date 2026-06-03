@@ -116,6 +116,7 @@ export default function About() {
                   src="/marketing-assets/images/personal-proof/systemic-view-diagram.png"
                   alt="Systemic View of CCI Anatomy"
                   fill
+                  sizes="(min-width: 768px) 720px, 100vw"
                   className="object-cover opacity-90"
                 />
               </div>
@@ -129,6 +130,7 @@ export default function About() {
                   src="/marketing-assets/images/personal-proof/mold-timeline-landscape.png"
                   alt="Mold Exposure Timeline"
                   fill
+                  sizes="(min-width: 768px) 720px, 100vw"
                   className="object-cover opacity-90"
                 />
               </div>
@@ -204,6 +206,7 @@ export default function About() {
                       src="/marketing-assets/lead_magnet_card.png"
                       alt="Checklist Cover"
                       fill
+                      sizes="80px"
                       className="object-cover"
                     />
                   </div>
@@ -257,7 +260,7 @@ export default function About() {
 
             <div className="w-full md:w-64 shrink-0 flex flex-col gap-6">
                <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-black border border-white/10">
-                 <Image src="/marketing-assets/images/personal-proof/combined-scans.png" alt="Combined Scans" fill className="object-cover opacity-90 grayscale hover:grayscale-0 transition-all duration-500" />
+                 <Image src="/marketing-assets/images/personal-proof/combined-scans.png" alt="Combined Scans" fill sizes="(min-width: 768px) 256px, 100vw" className="object-cover opacity-90 grayscale hover:grayscale-0 transition-all duration-500" />
                </div>
                <p className="text-xs text-muted mb-4">
                  Actual scans and X-rays confirming C1-C2 craniocervical instability. The data tells the truth.

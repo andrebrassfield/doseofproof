@@ -52,6 +52,7 @@ export default async function DoctorsMissGuidePage() {
               src="/marketing-assets/what_doctors_miss_card.png" 
               alt="What Doctors Miss Guide Cover" 
               fill 
+              sizes="(min-width: 768px) 512px, 100vw"
               className="object-cover"
               priority
             />
