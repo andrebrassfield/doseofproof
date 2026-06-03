@@ -124,8 +124,8 @@ export default function Home() {
                 icon={<BrandIcon id="scan-line" className="w-6 h-6 text-accent" />}
                 className="md:col-span-2 min-h-[300px]"
                 header={
-                  <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
-                     <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                  <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
+                      <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -135,8 +135,8 @@ export default function Home() {
                 icon={<BrandIcon id="inflammation-flame" className="w-6 h-6 text-accent" />}
                 className="md:col-span-1 min-h-[300px]"
                 header={
-                  <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
-                     <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                  <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
+                      <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -146,8 +146,8 @@ export default function Home() {
                 icon={<BrandIcon id="brain-circuit" className="w-6 h-6 text-accent" />}
                 className="md:col-span-1 min-h-[300px]"
                 header={
-                  <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
-                     <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                  <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
+                      <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -157,8 +157,8 @@ export default function Home() {
                 icon={<BrandIcon id="spine-neck" className="w-6 h-6 text-accent" />}
                 className="md:col-span-2 min-h-[300px]"
                 header={
-                  <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
-                     <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill className="object-cover object-top opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                  <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
+                      <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill className="object-contain opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -204,13 +204,16 @@ export default function Home() {
         
         <HorizontalPan>
           <div className="flex gap-8 px-6 lg:px-12 pb-24 h-[60dvh] items-center">
-            <div className="w-[85vw] md:w-[600px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-8 flex flex-col shrink-0 relative overflow-hidden">
-              <svg className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen" viewBox="0 0 1000 600">
-                <use href="/svgs/diagrams/clinical-diagrams.svg#vagal-pathway" />
-              </svg>
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent" />
-              <div className="relative z-10 mt-auto">
-                <h3 className="text-2xl font-bold tracking-tight mb-2">The Systemic View</h3>
+            <div className="w-[85vw] md:w-[600px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-8 flex flex-col shrink-0 relative overflow-hidden group hover:border-white/20 transition-colors">
+              <Image 
+                src="/marketing-assets/images/personal-proof/systemic-view-diagram.png"
+                alt="Systemic View: Vagus Nerve and C1-C2 Anatomy"
+                fill
+                className="object-cover opacity-80 grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent z-10" />
+              <div className="relative z-20 mt-auto">
+                <h3 className="text-2xl font-bold tracking-tight mb-2 group-hover:text-accent transition-colors">The Systemic View</h3>
                 <p className="text-muted">Treating the vagus nerve and upper cervical spine to restore the autonomic nervous system.</p>
               </div>
             </div>

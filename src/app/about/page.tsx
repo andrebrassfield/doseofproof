@@ -112,7 +112,7 @@ export default function About() {
               </p>
 
               <div className="my-10 relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900/50 border border-white/10">
-                <svg className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-80" viewBox="0 0 1000 600">
+                <svg className="absolute inset-0 w-full h-full mix-blend-screen opacity-80" viewBox="500 0 500 320">
                   <use href="/svgs/diagrams/clinical-diagrams.svg#cci-anatomy" />
                 </svg>
               </div>
@@ -122,8 +122,8 @@ export default function About() {
               </p>
 
               <div className="my-10 relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900/50 border border-white/10">
-                <svg className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-80" viewBox="0 0 1000 600">
-                  <use href="/svgs/diagrams/clinical-diagrams.svg#mold-mechanism" />
+                <svg className="absolute inset-0 w-full h-full mix-blend-screen opacity-80" viewBox="0 0 500 320">
+                  <use href="/svgs/diagrams/clinical-diagrams.svg#mold-flowchart" />
                 </svg>
               </div>
 
@@ -250,11 +250,11 @@ export default function About() {
             </div>
 
             <div className="w-full md:w-64 shrink-0 flex flex-col gap-6">
-               <div className="relative aspect-square rounded-xl overflow-hidden grayscale contrast-125 bg-white/5 border border-white/10">
-                 <Image src="/marketing-assets/scans/tytron-scan.png" alt="Dre's TyTron Scan" fill className="object-cover opacity-80" />
+               <div className="relative aspect-[3/4] rounded-xl overflow-hidden grayscale contrast-125 bg-black border border-white/10">
+                 <Image src="/marketing-assets/scans/tytron-scan.png" alt="Dre's TyTron Scan" fill className="object-contain opacity-90" />
                </div>
-               <div className="relative aspect-square rounded-xl overflow-hidden grayscale contrast-125 bg-white/5 border border-white/10">
-                 <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Dre's X-ray" fill className="object-cover object-top opacity-80" />
+               <div className="relative aspect-[3/4] rounded-xl overflow-hidden grayscale contrast-125 bg-black border border-white/10">
+                 <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Dre's X-ray" fill className="object-contain opacity-90" />
                </div>
                <p className="text-xs text-muted mb-4">
                  Actual scans and X-rays confirming C1-C2 craniocervical instability. The data tells the truth.

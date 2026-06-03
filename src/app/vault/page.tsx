@@ -234,12 +234,12 @@ export default function VaultPage() {
                 <h3 className="text-sm font-bold uppercase tracking-widest text-accent/80">
                   C1-C2 Structural Finding
                 </h3>
-                <div className="relative aspect-square rounded-xl overflow-hidden bg-black/30 border border-white/5">
+                <div className="relative aspect-square rounded-xl overflow-hidden bg-black border border-white/5">
                   <Image 
                     src="/marketing-assets/images/personal-proof/combined-scans.png" 
                     alt="Dre's C1-C2 Instability Cervical X-ray and TyTron Scan findings" 
                     fill 
-                    className="object-cover" 
+                    className="object-contain" 
                   />
                 </div>
                 <p className="text-xs text-muted leading-relaxed">
@@ -252,12 +252,12 @@ export default function VaultPage() {
                 <h3 className="text-sm font-bold uppercase tracking-widest text-accent/80">
                   Protocol Root Cause Map
                 </h3>
-                <div className="relative aspect-[3/2] rounded-xl overflow-hidden bg-black/30 border border-white/5">
+                <div className="relative aspect-[3/2] rounded-xl overflow-hidden bg-black border border-white/5">
                   <Image 
                     src="/marketing-assets/images/personal-proof/protocol-infographic-landscape.png" 
                     alt="Protocol root cause restoration details infographic" 
                     fill 
-                    className="object-cover" 
+                    className="object-contain" 
                   />
                 </div>
                 <p className="text-xs text-muted leading-relaxed">
