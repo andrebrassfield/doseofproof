@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { Button } from "@/components/ui/Button";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import { HorizontalPan } from "@/components/ui/HorizontalPan";
@@ -93,9 +93,9 @@ export default function Home() {
           </div>
           <div className="flex-1 bg-zinc-900/50 relative overflow-hidden hidden md:block border-l border-white/5">
              <div className="absolute inset-0 pointer-events-none z-20">
-               <svg className="w-full h-full text-accent/20" preserveAspectRatio="none">
-                 <use href="/svgs/decorative/decorative-elements.svg#corner-accent" />
-               </svg>
+                <svg className="w-full h-full text-accent/20" preserveAspectRatio="none">
+                  <use href="/svgs/decorative/decorative-elements.svg#corner-brackets-tl" />
+                </svg>
              </div>
              <div className="absolute inset-0 pointer-events-none z-20 scan-line-bg" />
              <Image 
@@ -121,7 +121,7 @@ export default function Home() {
               <BentoGridItem 
                 title="C1-C2 Instability"
                 description="Confirmed craniocervical instability with TyTron paraspinal infrared scans. The upper neck was irritating the vagus nerve."
-                icon={<BrandIcon id="scan" className="w-6 h-6 text-accent" />}
+                icon={<BrandIcon id="scan-line" className="w-6 h-6 text-accent" />}
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
@@ -132,19 +132,29 @@ export default function Home() {
               <BentoGridItem 
                 title="MCAS & Histamine"
                 description="Mast cell activation driven by structural failure and mold. The body's inflammation brake was broken."
-                icon={<BrandIcon id="pulse" className="w-6 h-6 text-accent" />}
-                className="md:col-span-1"
+                icon={<BrandIcon id="inflammation-flame" className="w-6 h-6 text-accent" />}
+                className="md:col-span-1 min-h-[300px]"
+                header={
+                  <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
+                     <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                  </div>
+                }
               />
               <BentoGridItem 
                 title="4 Years Hidden Mold"
                 description="Lived in a hidden moldy house that overlapped with my father's stage 4 lung cancer diagnosis."
-                icon={<BrandIcon id="brain" className="w-6 h-6 text-accent" />}
-                className="md:col-span-1"
+                icon={<BrandIcon id="brain-circuit" className="w-6 h-6 text-accent" />}
+                className="md:col-span-1 min-h-[300px]"
+                header={
+                  <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
+                     <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                  </div>
+                }
               />
               <BentoGridItem 
                 title="Loss of Cervical Curve"
                 description="X-ray confirmed mechanical loss of normal curve, causing constant downstream inflammatory signals."
-                icon={<BrandIcon id="spine-curve" className="w-6 h-6 text-accent" />}
+                icon={<BrandIcon id="spine-neck" className="w-6 h-6 text-accent" />}
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-zinc-900/50 rounded-lg relative overflow-hidden border border-white/5">
@@ -205,19 +215,52 @@ export default function Home() {
               </div>
             </div>
             {[
-              { title: "Blair Upper Cervical", desc: "Precise adjustments by Dr. Jackson Chism to fix the mechanical root cause.", iconId: "firstaid" },
-              { title: "Vagal Tone Work", desc: "Restoring the parasympathetic brake to calm the autonomic chaos.", iconId: "vagus" },
-              { title: "TOS Stretches", desc: "Gentle thoracic outlet stretches to reduce stress.", iconId: "thoracic" },
-              { title: "Minerals & NAD+", desc: "Terrain stabilization and cellular redox support.", iconId: "capsule" },
-              { title: "Hydroxyzine", desc: "Managing the anxiety and MCAS overlap while the root heals.", iconId: "pill" },
+              {
+                title: "Blair Upper Cervical",
+                desc: "Precise adjustments by Dr. Jackson Chism to fix the mechanical root cause.",
+                iconId: "firstaid",
+                image: "/marketing-assets/images/personal-proof/cervical-xray.png"
+              },
+              {
+                title: "Vagal Tone Work",
+                desc: "Restoring the parasympathetic brake to calm the autonomic chaos.",
+                iconId: "vagus",
+                image: "/marketing-assets/images/proof-cards/proof-vagal-tone-1080x1080.png"
+              },
+              {
+                title: "TOS Stretches",
+                desc: "Gentle thoracic outlet stretches to reduce stress.",
+                iconId: "thoracic",
+                image: "/marketing-assets/images/proof-cards/proof-recovery-timeline-1080x1080.png"
+              },
+              {
+                title: "Minerals & NAD+",
+                desc: "Terrain stabilization and cellular redox support.",
+                iconId: "capsule",
+                image: "/marketing-assets/images/proof-cards/proof-protocol-stack-1080x1080.png"
+              },
+              {
+                title: "Hydroxyzine",
+                desc: "Managing the anxiety and MCAS overlap while the root heals.",
+                iconId: "pill",
+                image: "/marketing-assets/images/protocol-teardown/standard-anxiety-protocol.png"
+              },
             ].map((item, i) => (
-              <div key={i} className="proof-card w-[85vw] md:w-[400px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-8 flex flex-col shrink-0 group hover:border-white/20 transition-colors">
-                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-auto group-hover:bg-accent/10 transition-colors text-white group-hover:text-accent">
-                  <BrandIcon id={item.iconId} className="w-6 h-6" />
+              <div key={i} className="proof-card w-[85vw] md:w-[400px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-6 flex flex-col shrink-0 group hover:border-white/20 transition-colors">
+                <div className="relative w-full aspect-[16/10] bg-zinc-950 rounded-xl overflow-hidden mb-6 border border-white/5">
+                  <Image 
+                    src={item.image} 
+                    alt={item.title} 
+                    fill 
+                    className="object-cover grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700" 
+                  />
+                  <div className="absolute top-3 left-3 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:text-accent group-hover:border-accent/30 transition-colors">
+                    <BrandIcon id={item.iconId} className="w-5 h-5" />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold tracking-tight mb-2">{item.title}</h3>
-                  <p className="text-muted">{item.desc}</p>
+                <div className="mt-auto">
+                  <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2 group-hover:text-accent transition-colors">{item.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -251,7 +294,7 @@ export default function Home() {
 
         {/* LEAD MAGNET CTA SECTION */}
         <section className="py-32 px-6 lg:px-12 bg-zinc-900 border-t border-white/10 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "url('/marketing-assets/textures/texture-1.png')", backgroundSize: "cover" }} />
+          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "url('/marketing-assets/images/textures/texture-dot-grid-1080x1080.png')", backgroundSize: "cover" }} />
           <div className="max-w-3xl mx-auto text-center relative z-10">
             <BrandIcon id="check" className="w-12 h-12 text-accent mx-auto mb-6" />
             <h2 className="text-4xl md:text-6xl tracking-tighter mb-6">The First 30 Days</h2>

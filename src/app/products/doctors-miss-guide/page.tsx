@@ -5,7 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { LemonsqueezyEmbed } from "@/components/ui/LemonsqueezyEmbed";
-import Image from "next/image";
+import { SafeImage as Image } from "@/components/ui/SafeImage";
 
 export default async function DoctorsMissGuidePage() {
   const filePath = path.join(process.cwd(), 'src/content/products/doctor-miss-guide-copy.mdx');

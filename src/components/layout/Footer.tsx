@@ -3,14 +3,9 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="relative border-t border-white/10 bg-background pt-16 pb-8 px-6 lg:px-12 mt-24 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-        <svg className="w-full h-full" preserveAspectRatio="none">
-          <use href="/svgs/decorative/decorative-elements.svg#noise-texture" />
-        </svg>
-      </div>
       <div className="absolute top-0 left-0 right-0 h-1 pointer-events-none">
         <svg className="w-full h-full text-accent" preserveAspectRatio="none" fill="currentColor">
-          <use href="/svgs/decorative/decorative-elements.svg#line-accent" />
+          <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
         </svg>
       </div>
       
@@ -18,7 +13,7 @@ export function Footer() {
         <div>
           <Link href="/" className="font-sans font-bold text-xl tracking-tight text-white flex items-center gap-3 mb-4">
             <svg className="w-5 h-5 text-muted" viewBox="0 0 24 24" fill="currentColor">
-              <use href="/svgs/logos/logo-variants.svg#logo-monochrome" />
+              <use href="/svgs/logos/logo-variants.svg#monogram" />
             </svg>
             Dose of Proof
           </Link>

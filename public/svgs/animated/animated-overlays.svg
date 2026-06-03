@@ -13,6 +13,10 @@
         0% { opacity: 0; }
         100% { opacity: 1; }
       }
+      @keyframes scanBlink {
+        0%, 100% { opacity: 0.15; }
+        50% { opacity: 0.6; }
+      }
       .scan-line {
         stroke: #C8FF00;
         stroke-width: 2;
@@ -26,11 +30,12 @@
         animation: pulseGlow 1.5s ease-in-out infinite;
       }
       .reveal-text {
-        fill: #FFFFFF;
-        font-family: Arial, sans-serif;
-        font-size: 24px;
+        fill: #C8FF00;
+        font-family: SFMono-Regular, Consolas, Courier, monospace;
+        font-size: 10px;
         font-weight: bold;
-        animation: fadeInReveal 1s ease-out forwards;
+        letter-spacing: 0.25em;
+        animation: scanBlink 2.5s ease-in-out infinite;
       }
     </style>
   </defs>
@@ -39,7 +44,7 @@
   <g id="scan-line-animation" transform="translate(50, 50)">
     <rect x="0" y="0" width="300" height="300" fill="none" stroke="#1a1a1a" stroke-width="1"/>
     <line class="scan-line" x1="0" y1="0" x2="300" y2="0"/>
-    <text x="120" y="150" class="reveal-text" opacity="0.5">SCANNING...</text>
+    <text x="105" y="280" class="reveal-text">SCANNING...</text>
   </g>
 
   <!-- OVERLAY 2: Pulse/Glow Ring on Key Metrics -->

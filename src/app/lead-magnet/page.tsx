@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -35,14 +35,14 @@ export default function LeadMagnet() {
     <>
       <Navbar />
       <main className="flex-1 min-h-[100dvh] flex flex-col justify-center py-32 relative overflow-hidden bg-zinc-950">
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "url('/marketing-assets/textures/texture-2.png')", backgroundSize: "cover" }} />
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "url('/marketing-assets/images/textures/texture-noise-grain-1080x1080.png')", backgroundSize: "cover" }} />
         
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
           
           <div className="flex-1 w-full max-w-xl">
              <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-accent/5">
                 <Image 
-                  src="/marketing-assets/lead-magnet/cover.png"
+                  src="/marketing-assets/images/lead-magnet/page-1-cover.png"
                   alt="The First 30 Days Mold Detox Checklist Cover"
                   fill
                   className="object-cover"

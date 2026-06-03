@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -32,7 +32,7 @@ export default function About() {
 
               <div className="w-full h-1 mt-12 mb-8 text-accent/50">
                 <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
-                  <use href="/svgs/decorative/decorative-elements.svg#line-accent" />
+                  <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>
               <h2 className="text-3xl text-white font-bold tracking-tight">
@@ -65,7 +65,7 @@ export default function About() {
 
               <div className="w-full h-1 mt-12 mb-8 text-accent/50">
                 <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
-                  <use href="/svgs/decorative/decorative-elements.svg#line-accent" />
+                  <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>
               <h2 className="text-3xl text-white font-bold tracking-tight">
@@ -82,7 +82,7 @@ export default function About() {
 
               <div className="w-full h-1 mt-12 mb-8 text-accent/50">
                 <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
-                  <use href="/svgs/decorative/decorative-elements.svg#line-accent" />
+                  <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>
               <h2 className="text-3xl text-white font-bold tracking-tight">

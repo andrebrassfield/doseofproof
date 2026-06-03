@@ -6,12 +6,12 @@ import Link from "next/link";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 
 const CATEGORY_ICONS: Record<string, string> = {
-  peptides: "capsule",
-  "mold-recovery": "mold",
-  cci: "spine-curve",
-  mcas: "pulse",
-  protocols: "filecode",
-  supplements: "flask",
+  peptides: "pill-capsule",
+  "mold-recovery": "microscope",
+  cci: "spine-neck",
+  mcas: "heart-rate-vagal",
+  protocols: "folder-structure",
+  supplements: "lab-flask",
 };
 
 export const metadata: Metadata = {
@@ -36,7 +36,7 @@ export default function BlogIndex() {
             <h1 className="text-5xl md:text-7xl tracking-tighter leading-none mb-6">
               The Blog
             </h1>
-            <p className="text-xl text-muted max-w-2xl">
+            <p className="text-xl md:text-2xl font-light text-white/70 max-w-3xl leading-relaxed">
               Deep dives into the research, protocols, and mechanisms behind
               chronic illness recovery. No fluff. Just data.
             </p>

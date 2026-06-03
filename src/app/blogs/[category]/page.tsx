@@ -57,7 +57,7 @@ export default async function CategoryPage({
             <h1 className="text-5xl md:text-7xl tracking-tighter leading-none mb-6">
               {categoryName}
             </h1>
-            <p className="text-xl text-muted max-w-2xl">
+            <p className="text-xl md:text-2xl font-light text-white/70 max-w-3xl leading-relaxed">
               {articles.length} article{articles.length !== 1 ? "s" : ""} — evidence-based breakdowns, protocols, and research.
             </p>
           </header>

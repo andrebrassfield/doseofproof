@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,7 +60,10 @@ export default function RootLayout({
       <head>
         <script src="https://cdn.usefathom.com/script.js" data-site="YOUR_FATHOM_SITE_ID" data-excluded-domains="shop.doseofproof.com" defer />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }
