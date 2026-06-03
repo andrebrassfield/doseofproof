@@ -40,15 +40,15 @@ export default function LeadMagnet() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
           
           <div className="flex-1 w-full max-w-xl">
-             <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-accent/5">
-                <Image 
-                  src="/marketing-assets/lead_magnet_card.png"
-                  alt="The First 30 Days Mold Detox Checklist Cover"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-             </div>
+             <Image 
+               src="/marketing-assets/lead_magnet_card.png"
+               alt="The First 30 Days Mold Detox Checklist Cover"
+               width={1080}
+               height={1350}
+               wrapperClassName="rounded-2xl border border-white/20 shadow-2xl shadow-accent/5 w-full"
+               className="w-full h-auto"
+               priority
+             />
           </div>
 
           <div className="flex-1 w-full">
