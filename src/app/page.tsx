@@ -137,7 +137,7 @@ export default function Home() {
             <p className="text-lg text-muted max-w-[65ch] mb-10 leading-relaxed">
               I got tired of vague wellness advice and broken healthcare incentives. 
               After 7 months of mystery symptoms, I stopped treating symptoms and started fixing the terrain. 
-              This is my protocol.
+              This is the proof file.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button href="/about" size="lg">Read the Full Story</Button>

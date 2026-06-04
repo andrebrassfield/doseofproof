@@ -192,7 +192,7 @@ export default function About() {
               <div className="mt-16 space-y-10">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button href="/vault" size="lg" className="flex-1 text-center justify-center">
-                    See My Current Protocol
+                    Open the Protocol Vault
                   </Button>
                   <Button href="/blogs" variant="secondary" size="lg" className="flex-1 text-center justify-center">
                     Browse the Research
