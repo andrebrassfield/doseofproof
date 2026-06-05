@@ -1,23 +1,76 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { Button } from "@/components/ui/Button";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
-import { HorizontalPan } from "@/components/ui/HorizontalPan";
 import { RevealStagger, RevealItem } from "@/components/ui/RevealStagger";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
+
+const commandCenterMetrics = [
+  { label: "Root causes mapped", value: "3", detail: "CCI, mold, mast cells" },
+  { label: "Primary signal", value: "C1-C2", detail: "mechanical irritation" },
+  { label: "Current phase", value: "Rebuild", detail: "stabilize before scale" },
+];
+
+const commandCenterTracks = [
+  {
+    title: "Structural correction",
+    body: "Upper cervical work, curve restoration, posture constraints, and post-adjustment signal tracking.",
+    icon: "spine-neck",
+    status: "Active",
+  },
+  {
+    title: "Immune load reduction",
+    body: "Mold exposure history, mycotoxin testing, MCAS patterns, histamine load, and detox tolerance.",
+    icon: "inflammation-flame",
+    status: "Sequencing",
+  },
+  {
+    title: "Nervous-system output",
+    body: "HRV, sleep, symptom logs, vagal tone work, and what actually moves the recovery trend.",
+    icon: "heart-rate-vagal",
+    status: "Tracked",
+  },
+];
+
+const proofPathways = [
+  {
+    href: "/start-here",
+    title: "Start Here",
+    body: "The origin story, scans, timeline, and what Dose of Proof is actually building.",
+    image: "/marketing-assets/images/personal-proof/combined-scans.png",
+    icon: "scan-line",
+  },
+  {
+    href: "/testing-roadmap",
+    title: "Testing Roadmap",
+    body: "The missing tests doctors rarely order when basic labs come back normal.",
+    image: "/marketing-assets/images/doctors-miss-series/cirs-mold-panel.png",
+    icon: "test-tube",
+  },
+  {
+    href: "/protocol-vault",
+    title: "Protocol Vault",
+    body: "The living operating system: what I am doing, tracking, changing, and monetizing.",
+    image: "/marketing-assets/images/personal-proof/protocol-infographic-landscape.png",
+    icon: "folder-structure",
+  },
+];
 
 export default function Home() {
   const [heroVariant, setHeroVariant] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const searchParams = new URLSearchParams(window.location.search);
-      setHeroVariant(searchParams.get("hero"));
+      window.requestAnimationFrame(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        setHeroVariant(searchParams.get("hero"));
+      });
     }
-    
+
     let ctx: any;
     (async () => {
       const { gsap } = await import('gsap');
@@ -73,7 +126,7 @@ export default function Home() {
             <p className="text-lg text-muted max-w-[65ch] mb-10 leading-relaxed">
               I got tired of vague wellness advice and broken healthcare incentives. 
               After 7 months of mystery symptoms, I stopped treating symptoms and started fixing the terrain. 
-              This is my protocol.
+              This is the proof file.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button href="/about" size="lg">Read the Full Story</Button>
@@ -87,12 +140,13 @@ export default function Home() {
                 </svg>
              </div>
              <div className="absolute inset-0 pointer-events-none z-20 scan-line-bg" />
-             <Image 
-               src="/marketing-assets/images/hero/hero-dark-dna-watermark-1920x1080.png"
-               alt="Dark DNA Watermark Background"
-               fill
-               className="object-cover opacity-70 mix-blend-luminosity grayscale"
-               priority
+             <div
+               aria-hidden="true"
+               className="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-luminosity grayscale"
+               style={{
+                 backgroundImage:
+                   "url('/marketing-assets/images/hero/hero-dark-dna-watermark-1920x1080.png')",
+               }}
              />
              <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10" />
           </div>
@@ -105,6 +159,7 @@ export default function Home() {
               src="/marketing-assets/images/hero/section-the-proof-1920x600.png"
               alt="Section The Proof Background"
               fill
+              sizes="100vw"
               className="object-cover opacity-30 mix-blend-luminosity grayscale"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
@@ -123,7 +178,7 @@ export default function Home() {
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/scans/tytron-scan.png" alt="TyTron Scan Proof" fill sizes="(min-width: 768px) 66vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -134,7 +189,7 @@ export default function Home() {
                 className="md:col-span-1 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/images/proof-cards/proof-inflammation-chart-1080x1080.png" alt="Inflammation Chart" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -145,7 +200,7 @@ export default function Home() {
                 className="md:col-span-1 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png" alt="Mycotoxin Test Result" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -156,7 +211,7 @@ export default function Home() {
                 className="md:col-span-2 min-h-[300px]"
                 header={
                   <div className="flex-1 w-full h-full min-h-[150px] bg-black rounded-lg relative overflow-hidden border border-white/5">
-                      <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
+                      <Image src="/marketing-assets/scans/lateral-xray.jpg" alt="Lateral Cervical X-Ray" fill sizes="(min-width: 768px) 66vw, 100vw" className="object-cover opacity-80 grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700" />
                   </div>
                 }
               />
@@ -187,86 +242,137 @@ export default function Home() {
                 src="/marketing-assets/scans/ap-xray.jpg"
                 alt="A-P Cervical X-Ray Mechanism Diagram"
                 fill
+                sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center opacity-80 mix-blend-luminosity grayscale hover:grayscale-0 hover:mix-blend-normal transition-all duration-700"
               />
             </div>
           </div>
         </section>
 
-        {/* THE PROTOCOL SECTION */}
-        <div className="bg-background pt-24 pb-12">
-          <div className="px-6 lg:px-12 max-w-7xl mx-auto mb-12">
-            <h2 className="text-4xl md:text-5xl tracking-tighter">My Current Protocol.</h2>
-          </div>
-        </div>
-        
-        <HorizontalPan>
-          <div className="flex gap-8 px-6 lg:px-12 pb-24 h-[60dvh] items-center">
-            <div className="w-[85vw] md:w-[600px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-8 flex flex-col shrink-0 relative overflow-hidden group hover:border-white/20 transition-colors">
-              <Image 
-                src="/marketing-assets/images/personal-proof/systemic-view-diagram.png"
-                alt="Systemic View: Vagus Nerve and C1-C2 Anatomy"
-                fill
-                className="object-cover opacity-80 grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent z-10" />
-              <div className="relative z-20 mt-auto">
-                <h3 className="text-2xl font-bold tracking-tight mb-2 group-hover:text-accent transition-colors">The Systemic View</h3>
-                <p className="text-muted">Treating the vagus nerve and upper cervical spine to restore the autonomic nervous system.</p>
+        {/* RECOVERY COMMAND CENTER */}
+        <section id="recovery-command-center" className="py-24 px-6 lg:px-12 bg-background relative overflow-hidden border-b border-white/10 scroll-mt-24">
+          <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "url('/marketing-assets/images/textures/texture-dot-grid-1080x1080.png')", backgroundSize: "cover" }} />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 items-end mb-12">
+              <div>
+                <span className="text-accent font-mono text-[10.5px] uppercase tracking-[0.22em] mb-6 block">
+                  Recovery Command Center
+                </span>
+                <h2 className="text-4xl md:text-6xl tracking-tighter leading-[1.05] mb-6">
+                  The protocol is not a stack.
+                  <span className="block text-white/50">It is a control system.</span>
+                </h2>
               </div>
+              <p className="text-lg text-muted leading-relaxed max-w-2xl lg:ml-auto">
+                Every intervention has to answer one question: did it move the signal? This is the operating layer behind Dose of Proof: root cause, current action, tracked output, and next decision.
+              </p>
             </div>
-            {[
-              {
-                title: "Blair Upper Cervical",
-                desc: "Precise adjustments by Dr. Jackson Chism to fix the mechanical root cause.",
-                iconId: "firstaid",
-                image: "/marketing-assets/images/personal-proof/cervical-xray.png"
-              },
-              {
-                title: "Vagal Tone Work",
-                desc: "Restoring the parasympathetic brake to calm the autonomic chaos.",
-                iconId: "vagus",
-                image: "/marketing-assets/images/proof-cards/proof-vagal-tone-1080x1080.png"
-              },
-              {
-                title: "TOS Stretches",
-                desc: "Gentle thoracic outlet stretches to reduce stress.",
-                iconId: "thoracic",
-                image: "/marketing-assets/images/proof-cards/proof-recovery-timeline-1080x1080.png"
-              },
-              {
-                title: "Minerals & NAD+",
-                desc: "Terrain stabilization and cellular redox support.",
-                iconId: "capsule",
-                image: "/marketing-assets/images/proof-cards/proof-protocol-stack-1080x1080.png"
-              },
-              {
-                title: "Hydroxyzine",
-                desc: "Managing the anxiety and MCAS overlap while the root heals.",
-                iconId: "pill",
-                image: "/marketing-assets/images/protocol-teardown/standard-anxiety-protocol.png"
-              },
-            ].map((item, i) => (
-              <div key={i} className="proof-card w-[85vw] md:w-[400px] h-full bg-zinc-900/30 border border-white/5 rounded-2xl p-6 flex flex-col shrink-0 group hover:border-white/20 transition-colors">
-                <div className="relative w-full aspect-[16/10] bg-zinc-950 rounded-xl overflow-hidden mb-6 border border-white/5">
-                  <Image 
-                    src={item.image} 
-                    alt={item.title} 
-                    fill 
-                    className="object-cover grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700" 
+
+            <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-6 items-stretch">
+              <div className="border border-white/10 rounded-2xl overflow-hidden bg-zinc-950/80">
+                <div className="relative aspect-[16/10] bg-black">
+                  <Image
+                    src="/marketing-assets/images/personal-proof/proof-dashboard-mockup.png"
+                    alt="Dose of Proof recovery dashboard"
+                    fill
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    className="object-cover opacity-90 grayscale hover:grayscale-0 transition-all duration-500"
                   />
-                  <div className="absolute top-3 left-3 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:text-accent group-hover:border-accent/30 transition-colors">
-                    <BrandIcon id={item.iconId} className="w-5 h-5" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+                  <div className="absolute left-5 bottom-5 right-5 flex flex-wrap gap-2">
+                    {["HRV", "Sleep", "Pain", "Histamine", "Adjustments"].map((label) => (
+                      <span key={label} className="rounded-full border border-accent/30 bg-black/60 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-accent">
+                        {label}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <div className="mt-auto">
-                  <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2 group-hover:text-accent transition-colors">{item.title}</h3>
-                  <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
+                <div className="grid sm:grid-cols-3 border-t border-white/10">
+                  {commandCenterMetrics.map((metric) => (
+                    <div key={metric.label} className="p-5 border-b sm:border-b-0 sm:border-r last:border-r-0 border-white/10">
+                      <p className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3">{metric.label}</p>
+                      <p className="text-3xl font-bold tracking-tight text-accent mb-1">{metric.value}</p>
+                      <p className="text-xs text-muted">{metric.detail}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
+
+              <div className="grid gap-4">
+                {commandCenterTracks.map((track) => (
+                  <div key={track.title} className="group border border-white/10 rounded-2xl bg-zinc-950/70 p-6 hover:border-accent/50 transition-colors">
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <div className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-accent group-hover:border-accent/40 transition-colors">
+                        <BrandIcon id={track.icon} className="w-6 h-6" />
+                      </div>
+                      <span className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-accent">
+                        {track.status}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold tracking-tight mb-3 group-hover:text-accent transition-colors">{track.title}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{track.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center border border-accent/20 rounded-2xl bg-accent/5 p-6">
+              <div>
+                <h3 className="text-xl font-bold tracking-tight mb-2">Want the actual operating system?</h3>
+                <p className="text-sm text-muted max-w-2xl">
+                  The full vault turns this homepage snapshot into a living map of tests, interventions, products, and weekly changes.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                <Button href="/protocol-vault" className="w-full sm:w-auto">
+                  Open Protocol Vault
+                </Button>
+                <Button href="/testing-roadmap" variant="secondary" className="w-full sm:w-auto">
+                  Map the Tests
+                </Button>
+              </div>
+            </div>
           </div>
-        </HorizontalPan>
+        </section>
+
+        {/* PROOF PATHWAYS */}
+        <section id="proof-pathways" className="py-24 px-6 lg:px-12 bg-zinc-950 scroll-mt-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div>
+                <span className="text-accent font-mono text-[10.5px] uppercase tracking-[0.22em] mb-5 block">
+                  Choose Your Entry Point
+                </span>
+                <h2 className="text-4xl md:text-5xl tracking-tighter">
+                  Follow the proof by what you need next.
+                </h2>
+              </div>
+              <p className="text-muted max-w-xl">
+                Story builds trust. Testing creates clarity. The vault turns clarity into a repeatable recovery engine.
+              </p>
+            </div>
+            <div className="grid lg:grid-cols-3 gap-4">
+              {proofPathways.map((path) => (
+                <Link key={path.href} href={path.href} className="group border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-accent/50 transition-colors">
+                  <div className="relative aspect-[16/10] bg-zinc-900">
+                    <Image
+                      src={path.image}
+                      alt={`${path.title} preview`}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <BrandIcon id={path.icon} className="w-6 h-6 text-accent mb-6" />
+                    <h3 className="text-2xl font-bold tracking-tight mb-3 group-hover:text-accent transition-colors">{path.title}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{path.body}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* SOCIAL PROOF SECTION */}
         <section className="py-24 px-6 lg:px-12 bg-background">

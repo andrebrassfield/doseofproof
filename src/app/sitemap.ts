@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllArticles } from "@/lib/mdx";
+import { diagnosticTests } from "@/lib/testing-roadmap";
 
 export const dynamic = "force-static";
 
@@ -11,6 +12,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+    { url: `${BASE_URL}/start-here`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE_URL}/testing-roadmap`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE_URL}/protocol-vault`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE_URL}/content`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
@@ -63,5 +67,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...categoryPages, ...articlePages];
+  const testPages: MetadataRoute.Sitemap = diagnosticTests.map((test) => ({
+    url: `${BASE_URL}/tests/${test.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...testPages, ...categoryPages, ...articlePages];
 }

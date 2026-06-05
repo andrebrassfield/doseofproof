@@ -16,17 +16,19 @@ export function Navbar() {
           Dose of Proof
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
-          <Link href="/about" className="hover:text-accent transition-colors">Start Here</Link>
-          <Link href="/products/what-doctors-miss" className="hover:text-accent transition-colors">Testing</Link>
+          <Link href="/start-here" className="hover:text-accent transition-colors">Start Here</Link>
+          <Link href="/testing-roadmap" className="hover:text-accent transition-colors">Testing</Link>
           <Link href="/blogs" className="hover:text-accent transition-colors">Blog</Link>
           <div className="relative group">
-            <Link href="/vault" className="hover:text-accent transition-colors py-2 flex items-center gap-1">
+            <Link href="/protocol-vault" className="hover:text-accent transition-colors py-2 flex items-center gap-1">
               Vault
               <svg className="w-4 h-4 opacity-60 group-hover:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </Link>
-            <div className="absolute top-full left-0 mt-2 w-48 bg-zinc-950 border border-white/10 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col py-2 z-50 shadow-xl">
+            <div className="absolute top-full left-0 mt-2 w-56 bg-zinc-950 border border-white/10 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col py-2 z-50 shadow-xl">
+              <Link href="/protocol-vault" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Protocol Vault</Link>
+              <Link href="/testing-roadmap" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Testing Roadmap</Link>
               <Link href="/products/what-doctors-miss" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Testing Guide</Link>
               <Link href="/products/mold-detox" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Mold Detox Course</Link>
               <Link href="/products/peptide-database" className="px-4 py-2 hover:bg-white/5 hover:text-accent transition-colors">Peptide Database</Link>
@@ -60,11 +62,13 @@ export function Navbar() {
         <div className="fixed inset-0 z-40 bg-zinc-950 flex flex-col items-center justify-center pt-20 px-6">
           <nav className="flex flex-col items-center gap-8 text-2xl font-bold text-white w-full">
             <Link href="/" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Home</Link>
-            <Link href="/about" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Start Here</Link>
-            <Link href="/products/what-doctors-miss" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Testing</Link>
+            <Link href="/start-here" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Start Here</Link>
+            <Link href="/testing-roadmap" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Testing</Link>
+            <Link href="/about" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">About</Link>
             <Link href="/blogs" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Blog</Link>
             <div className="flex flex-col items-center gap-4 text-xl text-white/60">
-              <Link href="/vault" onClick={() => setIsOpen(false)} className="text-white hover:text-accent transition-colors">Vault</Link>
+              <Link href="/protocol-vault" onClick={() => setIsOpen(false)} className="text-white hover:text-accent transition-colors">Protocol Vault</Link>
+              <Link href="/vault" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Products</Link>
               <Link href="/products/what-doctors-miss" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Testing Guide</Link>
               <Link href="/products/mold-detox" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Mold Detox Course</Link>
               <Link href="/products/peptide-database" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Peptide Database</Link>
