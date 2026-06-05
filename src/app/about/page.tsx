@@ -90,8 +90,8 @@ export default function About() {
                 </ul>
               </div>
 
-              <div className="w-full h-1 mt-12 mb-8 text-accent/50">
-                <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
+              <div className="w-full flex justify-center mt-12 mb-8 text-accent/50">
+                <svg className="w-64 h-8" viewBox="0 50 400 40" fill="currentColor">
                   <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>
@@ -135,8 +135,8 @@ export default function About() {
                 />
               </div>
 
-              <div className="w-full h-1 mt-12 mb-8 text-accent/50">
-                <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
+              <div className="w-full flex justify-center mt-12 mb-8 text-accent/50">
+                <svg className="w-64 h-8" viewBox="0 50 400 40" fill="currentColor">
                   <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>
@@ -152,8 +152,8 @@ export default function About() {
                 I’ve survived the medical gaslighting. I know the frustration of the fragmented, “treat one symptom at a time” model. I know the mental toll of trying to stay stoic while watching your own biology turn against you.
               </p>
 
-              <div className="w-full h-1 mt-12 mb-8 text-accent/50">
-                <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
+              <div className="w-full flex justify-center mt-12 mb-8 text-accent/50">
+                <svg className="w-64 h-8" viewBox="0 50 400 40" fill="currentColor">
                   <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>

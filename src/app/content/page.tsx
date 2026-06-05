@@ -92,11 +92,7 @@ export default function Content() {
         </div>
 
         <div className="p-8 border border-white/10 rounded-xl bg-zinc-950/50 max-w-xl mx-auto w-full relative overflow-hidden">
-           <div className="absolute inset-0 opacity-10 pointer-events-none">
-             <svg className="w-full h-full object-cover" preserveAspectRatio="none">
-               <use href="/svgs/decorative/decorative-elements.svg#noise-texture" />
-             </svg>
-           </div>
+           <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "url('/marketing-assets/images/textures/texture-noise-grain-1080x1080.png')", backgroundSize: "cover" }} />
            <h2 className="text-2xl font-bold tracking-tight mb-4">Get notified</h2>
            <p className="text-sm text-muted mb-6">Join the list to get new research breakdowns as soon as they drop.</p>
            <NewsletterForm />

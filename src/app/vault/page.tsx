@@ -33,8 +33,8 @@ export default function VaultPage() {
             </div>
           </header>
 
-          <div className="w-full h-1 my-12 text-white/10">
-            <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
+          <div className="w-full flex justify-center my-12 text-accent/30">
+            <svg className="w-96 h-8" viewBox="0 50 400 40" fill="currentColor">
               <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
             </svg>
           </div>
@@ -99,8 +99,8 @@ export default function VaultPage() {
                 </div>
               </section>
 
-              <div className="w-full h-1 my-12 text-white/5">
-                <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
+              <div className="w-full flex justify-center my-12 text-accent/30">
+                <svg className="w-96 h-8" viewBox="0 50 400 40" fill="currentColor">
                   <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>
@@ -160,8 +160,8 @@ export default function VaultPage() {
                 </div>
               </section>
 
-              <div className="w-full h-1 my-12 text-white/5">
-                <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
+              <div className="w-full flex justify-center my-12 text-accent/30">
+                <svg className="w-96 h-8" viewBox="0 50 400 40" fill="currentColor">
                   <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
                 </svg>
               </div>
@@ -294,8 +294,8 @@ export default function VaultPage() {
 
           </div>
 
-          <div className="w-full h-1 my-16 text-white/10">
-            <svg className="w-full h-full" preserveAspectRatio="none" fill="currentColor">
+          <div className="w-full flex justify-center my-16 text-accent/30">
+            <svg className="w-96 h-8" viewBox="0 50 400 40" fill="currentColor">
               <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
             </svg>
           </div>
