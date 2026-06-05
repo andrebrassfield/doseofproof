@@ -16,11 +16,12 @@ export function Navbar() {
           Dose of Proof
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
-          <Link href="/about" className="hover:text-accent transition-colors">About</Link>
+          <Link href="/about" className="hover:text-accent transition-colors">Start Here</Link>
+          <Link href="/products/what-doctors-miss" className="hover:text-accent transition-colors">Testing</Link>
           <Link href="/blogs" className="hover:text-accent transition-colors">Blog</Link>
           <div className="relative group">
             <Link href="/vault" className="hover:text-accent transition-colors py-2 flex items-center gap-1">
-              Products
+              Vault
               <svg className="w-4 h-4 opacity-60 group-hover:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
@@ -59,10 +60,11 @@ export function Navbar() {
         <div className="fixed inset-0 z-40 bg-zinc-950 flex flex-col items-center justify-center pt-20 px-6">
           <nav className="flex flex-col items-center gap-8 text-2xl font-bold text-white w-full">
             <Link href="/" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Home</Link>
-            <Link href="/about" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">About</Link>
+            <Link href="/about" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Start Here</Link>
+            <Link href="/products/what-doctors-miss" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Testing</Link>
             <Link href="/blogs" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Blog</Link>
             <div className="flex flex-col items-center gap-4 text-xl text-white/60">
-              <Link href="/vault" onClick={() => setIsOpen(false)} className="text-white hover:text-accent transition-colors">Products</Link>
+              <Link href="/vault" onClick={() => setIsOpen(false)} className="text-white hover:text-accent transition-colors">Vault</Link>
               <Link href="/products/what-doctors-miss" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Testing Guide</Link>
               <Link href="/products/mold-detox" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Mold Detox Course</Link>
               <Link href="/products/peptide-database" onClick={() => setIsOpen(false)} className="hover:text-accent transition-colors">Peptide Database</Link>

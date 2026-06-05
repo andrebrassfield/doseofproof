@@ -19,7 +19,7 @@ export function HorizontalPan({ children }: { children: React.ReactNode }) {
     const ctx = gsap.context(() => {
       const distance = track.current!.scrollWidth - window.innerWidth;
       
-      gsap.to(track.current, {
+      const panTween = gsap.to(track.current, {
         x: -distance,
         ease: "none",
         scrollTrigger: {
@@ -30,6 +30,26 @@ export function HorizontalPan({ children }: { children: React.ReactNode }) {
           scrub: 1,
           invalidateOnRefresh: true,
         },
+      });
+
+      // Animate the proof cards horizontally as they enter the screen
+      gsap.utils.toArray(".proof-card").forEach((card: any) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: panTween,
+              start: "left 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
       });
     }, wrap);
     

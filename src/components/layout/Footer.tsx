@@ -3,8 +3,8 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="relative border-t border-white/10 bg-background pt-16 pb-8 px-6 lg:px-12 mt-24 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-1 pointer-events-none">
-        <svg className="w-full h-full text-accent" preserveAspectRatio="none" fill="currentColor">
+      <div className="absolute top-0 left-0 right-0 h-8 pointer-events-none flex justify-center -translate-y-1/2">
+        <svg className="w-96 h-full text-accent" viewBox="0 50 400 40" fill="currentColor">
           <use href="/svgs/decorative/decorative-elements.svg#divider-horizontal" />
         </svg>
       </div>
