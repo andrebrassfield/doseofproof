@@ -78,17 +78,6 @@ export default function Home() {
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
-        // Animate proof cards on scroll
-        gsap.utils.toArray('.proof-card').forEach((card: any) => {
-          gsap.fromTo(card, 
-            { opacity: 0, y: 60 },
-            {
-              opacity: 1, y: 0,
-              scrollTrigger: { trigger: card, start: 'top 85%', scrub: 1 },
-            }
-          );
-        });
-
         // Animate X-ray scan — lock in place while text scrolls
         gsap.to('.scan-lock', {
           scrollTrigger: { trigger: '.scan-lock-container', start: 'top 20%', end: 'bottom bottom', scrub: true },
@@ -145,8 +134,8 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-1 bg-zinc-900/50 relative overflow-hidden hidden md:block border-l border-white/5">
-             <div className="absolute inset-0 pointer-events-none z-20">
-                <svg className="w-full h-full text-accent/20" preserveAspectRatio="none">
+             <div className="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
+                <svg className="w-32 h-32 text-accent opacity-30 animate-pulse" viewBox="500 150 80 80">
                   <use href="/svgs/decorative/decorative-elements.svg#corner-brackets-tl" />
                 </svg>
              </div>
