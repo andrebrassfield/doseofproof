@@ -45,3 +45,14 @@ body {
     transition: none !important;
   }
 }
+
+/* No-JS fallbacks:
+   - When JS is disabled the <html> element keeps its `no-js` class.
+   - Hide the interactive (.js-only) components so users get the static
+     <noscript> fallback instead. */
+html.no-js .js-only {
+  display: none !important;
+}
+html:not(.no-js) noscript .no-js-fallback {
+  display: block !important;
+}

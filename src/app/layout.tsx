@@ -58,9 +58,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased no-js`}
     >
       <head>
+        {/* Toggle .no-js off as soon as JS hydrates so CSS can show .js-only
+            components and hide <noscript> fallbacks. */}
+        <Script id="no-js-toggle" strategy="beforeInteractive">
+          {`document.documentElement.classList.remove('no-js');`}
+        </Script>
         <Script
           src="https://cdn.usefathom.com/script.js"
           data-site={fathomId}
