@@ -1,0 +1,62 @@
+# Dose of Proof — Design System
+
+The component library that powers `doseofproof.com`. Every visible element on the site is composed from these primitives.
+
+## Design tokens
+
+Tokens live in `src/app/globals.css` as Tailwind v4 CSS-first `@theme inline` variables. The site is **dark-only by design** — `prefers-color-scheme: light` is intentionally NOT implemented (medical/clinical gravitas, not consumer wellness).
+
+| Token            | Value      | Purpose                                           |
+| ---------------- | ---------- | ------------------------------------------------- |
+| `--background`   | `#0D0D0D`  | Base canvas                                       |
+| `--foreground`   | `#FFFFFF`  | Primary text                                      |
+| `--accent`       | `#C8FF00`  | The "proof green" — CTAs, highlights, focus rings |
+| `--accent-muted` | `rgba(200,255,0,0.15)` | Accent backgrounds, hover states       |
+| `--muted`        | `#B0B0B0`  | Secondary text, supporting copy                   |
+| `--warm`         | `#C8733A`  | Earthy emphasis, supplement-stack callouts        |
+| `--proof-green`  | `#22C55E`  | Status: optimal (HRV, alignment, recovery)        |
+| `--proof-amber`  | `#F59E0B`  | Status: warning (subclinical, watch)              |
+| `--proof-red`    | `#EF4444`  | Status: critical / disclaimer                     |
+
+In Tailwind classes: `bg-accent`, `text-accent`, `border-accent/30`, `text-muted`, `bg-proof-green/10`, etc. (these are derived from the CSS variables via `@theme inline`).
+
+## Typography
+
+- **Sans:** Geist Sans (`var(--font-geist-sans)`) — set on `<body>`.
+- **Mono:** Geist Mono (`var(--font-geist-mono)`) — used for hot metadata, numeric counters, and clinical labels (`font-mono text-xs uppercase tracking-widest`).
+- **Scale:** fluid `clamp()` not in use yet; static scale. Add fluid type as a 5.1 follow-up.
+
+## Motion
+
+`motion` (Framer Motion successor) is the only animation library. Every animated component MUST:
+
+1. Call `useReducedMotion()` and short-circuit transforms when true.
+2. Avoid animating layout-affecting properties (`width`, `height`, `top`, `left`) — use `transform` + `opacity`.
+3. Keep `prefers-reduced-motion` honest via the global rule in `globals.css`.
+
+## Component inventory
+
+| Component                                       | Category    | Notes                                |
+| ----------------------------------------------- | ----------- | ------------------------------------ |
+| [Button](./?path=/story/ui-button--default)     | UI          | Magnetic spring, polymorphic (a/btn) |
+| [BrandIcon](./?path=/story/ui-brandicon--default) | UI        | SVG sprite wrapper, 25 icons         |
+| [BentoGrid](./?path=/story/ui-bentogrid--default) | UI        | 3-col responsive bento              |
+| [DisclaimerBanner](./?path=/story/ui-disclaimerbanner--default) | UI | Required on all health pages |
+| [NewsletterForm](./?path=/story/ui-newsletterform--default) | UI | Client-side stub                  |
+| [LemonsqueezyEmbed](./?path=/story/ui-lemonsqueezyembed--default) | UI | Checkout trigger              |
+| [AnalyticsTracker](./?path=/story/ui-analyticstracker--default) | UI | Invisible Fathom event pinger  |
+| [SafeImage](./?path=/story/ui-safeimage--default) | UI          | next/image + skeleton pulse          |
+| [RevealStagger](./?path=/story/ui-revealstagger--default) | UI    | In-view stagger, motion pair         |
+| [SmoothScroll](./?path=/story/ui-smoothscroll--default) | UI      | Lenis + GSAP ScrollTrigger (mount once) |
+| [ScanViewer](./?path=/story/interactive-scanviewer--default) | Interactive | Click hotspots to reveal clinical detail |
+| [TimelineScrubber](./?path=/story/interactive-timelinescrubber--default) | Interactive | 4-phase recovery timeline |
+| [ProtocolCalculator](./?path=/story/interactive-protocolcalculator--initial) | Interactive | 5Q → entry-point + lead magnet + first test |
+| [DashboardPreview](./?path=/story/interactive-dashboardpreview--aligned) | Interactive | NUCCA-aligned vs subluxated metric compare |
+
+## Adding a new component
+
+1. Place the file in `src/components/ui/<Name>.tsx` and the story in `src/components/ui/<Name>.stories.tsx`.
+2. Use `"use client"` only if the component needs hooks / state.
+3. If the component introduces a new token, add it to `src/app/globals.css` under `@theme inline`.
+4. Tag the story with `tags: ["autodocs"]` so the MDX page is generated.
+5. Run `pnpm storybook` to verify it renders. Run `pnpm test:storybook` for interaction tests.

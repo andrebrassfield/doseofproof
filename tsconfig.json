@@ -30,5 +30,12 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "dose-of-proof-shopify", "dose-of-proof"]
+  "exclude": [
+    "node_modules",
+    "dose-of-proof-shopify",
+    "dose-of-proof",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    ".storybook"
+  ]
 }
