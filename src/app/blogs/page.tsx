@@ -51,7 +51,7 @@ export default function BlogIndex() {
               {categories.map((cat) => (
                 <Link
                   key={cat.slug}
-                  href={`/blogs/${cat.slug}`}
+                  href={`/blogs/topics/${cat.slug}`}
                   className="group flex items-center gap-4 p-6 border border-white/10 rounded-xl hover:border-accent/30 hover:bg-accent/5 transition-all"
                 >
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-accent/10 transition-colors">
@@ -82,7 +82,7 @@ export default function BlogIndex() {
               {recentArticles.map((article) => (
                 <Link
                   key={article.meta.slug}
-                  href={`/blogs/${article.meta.category}/${article.meta.slug}`}
+                  href={`/blogs/${article.meta.slug}`}
                   className="group flex items-center justify-between p-6 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
                 >
                   <div className="flex-1 min-w-0">

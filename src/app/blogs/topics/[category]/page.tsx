@@ -69,7 +69,7 @@ export default async function CategoryPage({
               {articles.map((article) => (
                 <Link
                   key={article.meta.slug}
-                  href={`/blogs/${category}/${article.meta.slug}`}
+                  href={`/blogs/${article.meta.slug}`}
                   className="group bg-zinc-950/80 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all flex flex-col"
                 >
                   <div className="flex items-center gap-3 mb-4">

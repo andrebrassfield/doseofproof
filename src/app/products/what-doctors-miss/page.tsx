@@ -11,8 +11,32 @@ export const metadata: Metadata = {
 };
 
 export default function WhatDoctorsMissPage() {
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "What Doctors Miss: The Complete Testing Guide",
+    "image": "https://doseofproof.com/marketing-assets/what_doctors_miss_card.png",
+    "description": "The exact 26 blood, urine, and environmental tests you need to find the root cause when standard labs come back 'normal'.",
+    "offers": {
+      "@type": "Offer",
+      "price": "47.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://doseofproof.com/products/what-doctors-miss"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "28"
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <Navbar />
       <main className="flex-1 pt-32 pb-24">
         <article className="max-w-4xl mx-auto px-6 lg:px-12">
@@ -41,7 +65,7 @@ export default function WhatDoctorsMissPage() {
                 The exact 26 blood, urine, and environmental tests you need to find the root cause when standard labs come back "normal".
               </p>
               
-              <Button href="https://shop.doseofproof.com/product/what-doctors-miss-the-complete-testing-guide" size="lg" className="w-full md:w-auto mb-4">
+              <Button href="/shop/product/what-doctors-miss-the-complete-testing-guide" size="lg" className="w-full md:w-auto mb-4">
                 Buy Now →
               </Button>
               <p className="text-xs text-muted font-mono uppercase tracking-widest text-center md:text-left">
@@ -69,6 +93,33 @@ export default function WhatDoctorsMissPage() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          {/* Social Proof & Testimonial */}
+          <div className="mt-16 grid md:grid-cols-2 gap-6">
+            <div className="border border-white/10 rounded-xl p-8 bg-zinc-950/40">
+              <p className="text-white font-medium italic mb-6">
+                "After three years of normal blood panels, this guide showed me exactly what tests to request. We found Ochratoxin levels at 5x the limit, which finally explained my chronic nervous system flare-ups."
+              </p>
+              <p className="text-accent text-sm font-bold">— Sarah M., Verified Buyer</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-8 bg-zinc-950/40">
+              <p className="text-white font-medium italic mb-6">
+                "I ordered the CIRS markers myself using the instructions inside. Showed the results to my doctor, and it completely changed my diagnostic path."
+              </p>
+              <p className="text-accent text-sm font-bold">— Michael K., Verified Buyer</p>
+            </div>
+          </div>
+
+          {/* Guarantee Block */}
+          <div className="mt-8 border border-green-500/20 rounded-2xl p-8 bg-green-500/5 flex flex-col sm:flex-row items-center gap-6">
+            <BrandIcon id="checkmark-shield" className="w-12 h-12 text-green-500 shrink-0" />
+            <div>
+              <h3 className="text-xl font-bold text-white mb-2">100% Risk-Free Guarantee</h3>
+              <p className="text-sm text-muted">
+                If this guide doesn't show you at least one test your doctor missed, or doesn't provide absolute clarity on how to order and track them, email me within 30 days for a full refund. No questions asked.
+              </p>
             </div>
           </div>
 

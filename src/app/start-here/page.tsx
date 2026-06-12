@@ -5,11 +5,28 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
+import { TimelineScrubber } from "@/components/ui/TimelineScrubber";
 
 export const metadata: Metadata = {
   title: "Start Here: Dre's Dose of Proof",
-  description:
-    "The origin story, proof stack, and best next steps for following Dose of Proof.",
+  description: "The origin story, proof stack, and best next steps for following Dose of Proof.",
+  openGraph: {
+    title: "Start Here: Dre's Dose of Proof",
+    description: "The origin story, proof stack, and best next steps for following Dose of Proof.",
+    images: [
+      {
+        url: "/api/og?title=Start+Here%3A+Dre%27s+Dose+of+Proof&category=ORIGIN&description=The+origin+story%2C+proof+stack%2C+and+best+next+steps+for+following+Dose+of+Proof.",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Start Here: Dre's Dose of Proof",
+    description: "The origin story, proof stack, and best next steps for following Dose of Proof.",
+    images: ["/api/og?title=Start+Here%3A+Dre%27s+Dose+of+Proof&category=ORIGIN&description=The+origin+story%2C+proof+stack%2C+and+best+next+steps+for+following+Dose+of+Proof."],
+  },
 };
 
 const proofBeats = [
@@ -37,7 +54,7 @@ export default function StartHerePage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-28">
+      <main id="main-content" className="flex-1 pt-28">
         <section className="px-6 lg:px-12 py-20 border-b border-white/10 bg-background">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
             <div>
@@ -104,6 +121,24 @@ export default function StartHerePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* INTERACTIVE TIMELINE */}
+        <section className="px-6 lg:px-12 py-20 bg-zinc-950 border-t border-white/5">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-10 text-center md:text-left">
+              <span className="text-accent font-mono text-xs uppercase tracking-widest block mb-4">
+                The 4-Year Recovery Journey
+              </span>
+              <h2 className="text-4xl md:text-5xl tracking-tighter text-white">
+                Interactive Recovery Timeline
+              </h2>
+              <p className="text-muted text-sm mt-2 max-w-xl">
+                Scrub through the chronological recovery phases, symptoms, and active protocol updates.
+              </p>
+            </div>
+            <TimelineScrubber />
           </div>
         </section>
 

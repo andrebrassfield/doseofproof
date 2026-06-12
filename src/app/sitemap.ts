@@ -33,35 +33,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE_URL}/affiliate-disclosure`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE_URL}/medical-disclaimer`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    // Pillar Hub Pages
+    { url: `${BASE_URL}/mold-toxicity`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 },
+    { url: `${BASE_URL}/craniocervical-instability`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 },
+    { url: `${BASE_URL}/mcas-histamine`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 },
+    // Segmented Lead Magnets
+    { url: `${BASE_URL}/lead-magnet/start-here`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/lead-magnet/testing`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/lead-magnet/protocol`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/lead-magnet/mold`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/lead-magnet/cci`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
 
-  // Blog articles (both /content/ and /blogs/ routes)
-  const articlePages: MetadataRoute.Sitemap = articles.flatMap((article) => {
-    const entries: MetadataRoute.Sitemap = [
-      {
-        url: `${BASE_URL}/content/${article.meta.slug}`,
-        lastModified: article.meta.publishedAt ? new Date(article.meta.publishedAt) : new Date(),
-        changeFrequency: "monthly",
-        priority: 0.7,
-      },
-    ];
-
-    if (article.meta.category) {
-      entries.push({
-        url: `${BASE_URL}/blogs/${article.meta.category}/${article.meta.slug}`,
-        lastModified: article.meta.publishedAt ? new Date(article.meta.publishedAt) : new Date(),
-        changeFrequency: "monthly",
-        priority: 0.8,
-      });
-    }
-
-    return entries;
-  });
+  // Blog articles flat URLs
+  const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
+    url: `${BASE_URL}/blogs/${article.meta.slug}`,
+    lastModified: article.meta.publishedAt ? new Date(article.meta.publishedAt) : new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
 
   // Category pages
   const categories = [...new Set(articles.map((a) => a.meta.category).filter(Boolean))];
   const categoryPages: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${BASE_URL}/blogs/${cat}`,
+    url: `${BASE_URL}/blogs/topics/${cat}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
@@ -71,7 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}/tests/${test.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.8,
   }));
 
   return [...staticPages, ...testPages, ...categoryPages, ...articlePages];
