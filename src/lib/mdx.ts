@@ -142,6 +142,23 @@ export type TestContent = {
   content: string;
 };
 
+export function getTestSlugs() {
+  if (!fs.existsSync(testsDirectory)) return [];
+  return fs.readdirSync(testsDirectory).filter((file) => file.endsWith(".mdx"));
+}
+
+export function getAllTests(): (TestContent & { slug: string })[] {
+  const slugs = getTestSlugs();
+  return slugs
+    .map((file) => {
+      const slug = file.replace(/\.mdx$/, "");
+      const content = getTestBySlug(slug);
+      return content ? { ...content, slug } : null;
+    })
+    .filter((t): t is TestContent & { slug: string } => t !== null)
+    .sort((a, b) => a.meta.title.localeCompare(b.meta.title));
+}
+
 export function getTestBySlug(slug: string): TestContent | null {
   const realSlug = slug.replace(/\.mdx$/, '');
   const fullPath = path.join(testsDirectory, `${realSlug}.mdx`);
