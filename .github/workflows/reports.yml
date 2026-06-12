@@ -1,0 +1,114 @@
+name: Scheduled Reports
+
+# Phase 6.2e — Schedule the 4 report scripts via GitHub Actions cron.
+# The "skip if missing env" behavior in each script means a partially
+# configured secret store won't page Andre; the run just emits a [skip]
+# line and exits 0.
+
+on:
+  schedule:
+    # Weekly Growth — Mondays 14:00 UTC (= 9am CT / 7am PT)
+    - cron: "0 14 * * 1"
+    # Monthly Content — 1st of the month, 14:00 UTC
+    - cron: "0 14 1 * *"
+    # Weekly Revenue — Mondays 15:00 UTC (offset from Growth)
+    - cron: "0 15 * * 1"
+    # Daily Health — every day at 13:00 UTC
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+    # Manual trigger from the Actions UI for ad-hoc runs.
+
+concurrency:
+  group: reports
+  cancel-in-progress: false
+
+jobs:
+  weekly-growth:
+    if: github.event.schedule == null || github.event.schedule == '0 14 * * 1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - name: Run weekly-growth report
+        run: node scripts/reports/weekly-growth.mjs
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_WEEKLY_GROWTH_DB_ID: ${{ secrets.NOTION_WEEKLY_GROWTH_DB_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          FATHOM_API_KEY: ${{ secrets.FATHOM_API_KEY }}
+          FATHOM_SITE_ID: ${{ secrets.FATHOM_SITE_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+
+  monthly-content:
+    if: github.event.schedule == null || (github.event.schedule == '0 14 1 * *')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - name: Run monthly-content report
+        run: node scripts/reports/monthly-content.mjs
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_MONTHLY_CONTENT_DB_ID: ${{ secrets.NOTION_MONTHLY_CONTENT_DB_ID }}
+          FATHOM_API_KEY: ${{ secrets.FATHOM_API_KEY }}
+          FATHOM_SITE_ID: ${{ secrets.FATHOM_SITE_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+
+  weekly-revenue:
+    if: github.event.schedule == null || github.event.schedule == '0 15 * * 1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - name: Run weekly-revenue report
+        run: node scripts/reports/weekly-revenue.mjs
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_WEEKLY_REVENUE_DB_ID: ${{ secrets.NOTION_WEEKLY_REVENUE_DB_ID }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+          SHOPIFY_SHOP_DOMAIN: ${{ secrets.SHOPIFY_SHOP_DOMAIN }}
+
+  daily-health:
+    if: github.event.schedule == null || github.event.schedule == '0 13 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - name: Run daily-health report
+        run: node scripts/reports/daily-health.mjs
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          UPTIME_API_URL: ${{ secrets.UPTIME_API_URL }}
