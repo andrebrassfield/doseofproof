@@ -5,13 +5,14 @@ import matter from "gray-matter";
 const WORKSPACE_DIR = process.cwd();
 const ARTICLES_DIR = path.join(WORKSPACE_DIR, "src/content/articles");
 const TESTS_DIR = path.join(WORKSPACE_DIR, "src/content/tests");
+const PROTOCOL_VERSIONS_DIR = path.join(WORKSPACE_DIR, "src/content/protocol/versions");
 const PUBLIC_DIR = path.join(WORKSPACE_DIR, "public");
 const APP_DIR = path.join(WORKSPACE_DIR, "src/app");
 const CONTENT_STANDARDS_DOC = path.join(WORKSPACE_DIR, "CONTENT_STANDARDS.md");
 
 let errors = [];
 let warnings = [];
-let stats = { articles: 0, tests: 0, claims: 0, citations: 0, affiliateLinks: 0, images: 0, missingDimensions: 0 };
+let stats = { articles: 0, tests: 0, protocolVersions: 0, claims: 0, citations: 0, affiliateLinks: 0, images: 0, missingDimensions: 0 };
 
 function logError(file, message) {
   errors.push({ file: path.relative(WORKSPACE_DIR, file), message });
@@ -307,11 +308,56 @@ function validateTests() {
 }
 
 // ---------------------------------------------------------------------------
+// Protocol version validation
+// ---------------------------------------------------------------------------
+function validateProtocolVersions() {
+  if (!fs.existsSync(PROTOCOL_VERSIONS_DIR)) return;
+  const files = fs.readdirSync(PROTOCOL_VERSIONS_DIR).filter((f) => f.endsWith(".mdx"));
+  stats.protocolVersions = files.length;
+  console.log(`Found ${files.length} protocol versions to validate.`);
+  for (const file of files) {
+    const filePath = path.join(PROTOCOL_VERSIONS_DIR, file);
+    try {
+      const raw = fs.readFileSync(filePath, "utf8");
+      const parsed = matter(raw);
+      const data = parsed.data;
+      const content = parsed.content;
+
+      if (!data.version || typeof data.version !== "string") {
+        logError(filePath, "Missing or invalid 'version' frontmatter (e.g. 'v2.1').");
+      }
+      if (!data.date) {
+        logError(filePath, "Missing 'date' frontmatter field.");
+      }
+      if (!data.status || !["active", "superseded", "draft"].includes(data.status)) {
+        logError(filePath, "Missing or invalid 'status' field (must be active|superseded|draft).");
+      }
+      if (!data.summary || typeof data.summary !== "string") {
+        logError(filePath, "Missing or invalid 'summary' field.");
+      }
+      if (!Array.isArray(data.whatChanged) || data.whatChanged.length === 0) {
+        logError(filePath, "Missing or invalid 'whatChanged' field (must be a non-empty array).");
+      }
+      if (!data.why || typeof data.why !== "string") {
+        logError(filePath, "Missing or invalid 'why' field.");
+      } else if (data.why.toLowerCase().includes("placeholder") || data.why.toLowerCase().includes("mavis-scaffolded")) {
+        logWarning(filePath, "The 'why' field still contains a PLACEHOLDER marker — replace with Dre's actual reasoning before publishing.");
+      }
+
+      checkImages(filePath, content, data);
+    } catch (err) {
+      logError(filePath, `Failed to parse protocol version MDX: ${err.message}`);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Report
 // ---------------------------------------------------------------------------
 console.log("\nValidating content standards (Phase 5.3)…");
 validateArticles();
 validateTests();
+validateProtocolVersions();
 checkMedicalDisclaimerOnHealthPages();
 
 console.log("\n==================================");
@@ -319,6 +365,7 @@ console.log("      VALIDATION SUMMARY          ");
 console.log("==================================");
 console.log(`  Articles validated:       ${stats.articles}`);
 console.log(`  Test specs validated:     ${stats.tests}`);
+console.log(`  Protocol versions:        ${stats.protocolVersions}`);
 console.log(`  Claims detected:          ${stats.claims}`);
 console.log(`  Claims with citation:     ${stats.citations}`);
 console.log(`  Affiliate links checked:  ${stats.affiliateLinks}`);
