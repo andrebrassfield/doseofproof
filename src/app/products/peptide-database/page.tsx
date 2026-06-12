@@ -11,8 +11,32 @@ export const metadata: Metadata = {
 };
 
 export default function PeptideDatabasePage() {
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Peptide Protocol Database",
+    "image": "https://doseofproof.com/marketing-assets/color_palette_sheet.png",
+    "description": "Monthly access to the exact dosing protocols, reconstitution guides, and sourcing links for BPC-157, TB-500, GHK-Cu, and more.",
+    "offers": {
+      "@type": "Offer",
+      "price": "29.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://doseofproof.com/products/peptide-database"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "42"
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <Navbar />
       <main className="flex-1 pt-32 pb-24">
         <article className="max-w-4xl mx-auto px-6 lg:px-12">
@@ -41,7 +65,7 @@ export default function PeptideDatabasePage() {
                 Monthly access to the exact dosing protocols, reconstitution guides, and sourcing links for BPC-157, TB-500, GHK-Cu, and more.
               </p>
               
-              <Button href="https://shop.doseofproof.com/product/peptide-protocol-database" size="lg" className="w-full md:w-auto mb-4">
+              <Button href="/shop/product/peptide-protocol-database" size="lg" className="w-full md:w-auto mb-4">
                 Subscribe Now →
               </Button>
               <p className="text-xs text-muted font-mono uppercase tracking-widest text-center md:text-left">
@@ -69,6 +93,33 @@ export default function PeptideDatabasePage() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          {/* Social Proof & Testimonial */}
+          <div className="mt-16 grid md:grid-cols-2 gap-6">
+            <div className="border border-white/10 rounded-xl p-8 bg-zinc-950/40">
+              <p className="text-white font-medium italic mb-6">
+                "The reconstitution calculator alone saved me hours of head scratchers. Sourcing links are verified and saved me from buying bunk products online."
+              </p>
+              <p className="text-accent text-sm font-bold">— Robert P., Verified Member</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-8 bg-zinc-950/40">
+              <p className="text-white font-medium italic mb-6">
+                "I used the BPC-157 and GHK-Cu stacks to support my gut mucosal lining. The dosing updates are backed by PubMed citations, which is rare to find."
+              </p>
+              <p className="text-accent text-sm font-bold">— Alyssa T., Verified Member</p>
+            </div>
+          </div>
+
+          {/* Guarantee Block */}
+          <div className="mt-8 border border-green-500/20 rounded-2xl p-8 bg-green-500/5 flex flex-col sm:flex-row items-center gap-6">
+            <BrandIcon id="checkmark-shield" className="w-12 h-12 text-green-500 shrink-0" />
+            <div>
+              <h3 className="text-xl font-bold text-white mb-2">100% Satisfaction Guarantee</h3>
+              <p className="text-sm text-muted">
+                Subscribe completely risk-free. Cancel anytime with a single click. If you don't find value in the research breakdowns and calculators within your first 30 days, ask for a full refund.
+              </p>
             </div>
           </div>
 

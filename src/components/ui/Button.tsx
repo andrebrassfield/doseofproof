@@ -8,6 +8,9 @@ import Link from "next/link";
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
+  target?: string;
+  rel?: string;
+  download?: boolean | string;
   variant?: "primary" | "secondary" | "ghost";
   size?: "default" | "sm" | "lg";
 }

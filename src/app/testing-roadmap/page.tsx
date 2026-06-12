@@ -6,18 +6,35 @@ import { Button } from "@/components/ui/Button";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { diagnosticTests } from "@/lib/testing-roadmap";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
 
 export const metadata: Metadata = {
   title: "Testing Roadmap: What Doctors Miss",
-  description:
-    "A structured testing roadmap for mold, MCAS, CCI, vagal tone, and complex chronic symptoms.",
+  description: "A structured testing roadmap for mold, MCAS, CCI, vagal tone, and complex chronic symptoms.",
+  openGraph: {
+    title: "Testing Roadmap: What Doctors Miss",
+    description: "A structured testing roadmap for mold, MCAS, CCI, vagal tone, and complex chronic symptoms.",
+    images: [
+      {
+        url: "/api/og?title=Testing+Roadmap%3A+What+Doctors+Miss&category=ROADMAP&description=A+structured+testing+roadmap+for+mold%2C+MCAS%2C+CCI%2C+vagal+tone%2C+and+complex+chronic+symptoms.",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Testing Roadmap: What Doctors Miss",
+    description: "A structured testing roadmap for mold, MCAS, CCI, vagal tone, and complex chronic symptoms.",
+    images: ["/api/og?title=Testing+Roadmap%3A+What+Doctors+Miss&category=ROADMAP&description=A+structured+testing+roadmap+for+mold%2C+MCAS%2C+CCI%2C+vagal+tone%2C+and+complex+chronic+symptoms."],
+  },
 };
 
 export default function TestingRoadmapPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-28">
+      <main id="main-content" className="flex-1 pt-28">
         <section className="px-6 lg:px-12 py-20 relative overflow-hidden border-b border-white/10">
           <div className="absolute inset-0 opacity-25 pointer-events-none bg-cover bg-center" style={{ backgroundImage: "url('/marketing-assets/images/hero/section-the-proof-1920x600.png')" }} />
           <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
@@ -131,6 +148,7 @@ export default function TestingRoadmapPage() {
         </section>
       </main>
       <Footer />
+      <DisclaimerBanner />
     </>
   );
 }
