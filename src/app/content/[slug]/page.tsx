@@ -2,6 +2,7 @@ import { getArticleBySlug, getArticleSlugs } from "@/lib/mdx";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Metadata } from "next";
 
@@ -116,6 +117,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
         </article>
       </main>
+      <DisclaimerBanner />
       <Footer />
     </>
   );

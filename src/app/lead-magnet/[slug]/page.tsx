@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { Button } from "@/components/ui/Button";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
 import type { Metadata } from "next";
 import LeadMagnetForm from "./LeadMagnetForm";
 
@@ -224,6 +225,7 @@ export default async function SegmentedLeadMagnetPage({ params }: ParamsProps) {
           </div>
         </div>
       </main>
+      <DisclaimerBanner />
       <Footer />
     </>
   );

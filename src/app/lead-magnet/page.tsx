@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { Button } from "@/components/ui/Button";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
 
 import { useRouter } from "next/navigation";
 import { track } from "@/lib/analytics";
@@ -138,6 +139,7 @@ export default function LeadMagnet() {
           </div>
         </div>
       </main>
+      <DisclaimerBanner />
       <Footer />
     </>
   );

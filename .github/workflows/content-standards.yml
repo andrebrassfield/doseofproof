@@ -1,0 +1,132 @@
+name: Content Standards & Build Validation
+
+# Phase 5.3 — Content Standards CI gate.
+# This workflow runs on every PR and push to main. It enforces:
+# - Frontmatter schema on every article and test spec
+# - Claim → citation check (study shows / research indicates / PubMed ID → link required)
+# - Affiliate disclosure (external product links → "I earn a commission" inline)
+# - Medical disclaimer presence on every health page
+# - Image optimization (size + dimensions to prevent CLS)
+# - Lint + TypeScript + Next.js build
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  content-standards:
+    name: Content Standards (frontmatter, claims, affiliates, disclaimer, images)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Validate content (frontmatter + claims + affiliate + medical disclaimer + images)
+        run: node scripts/validate-content.mjs
+
+  typecheck:
+    name: TypeScript
+    runs-on: ubuntu-latest
+    needs: content-standards
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - run: npx tsc --noEmit
+
+  lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    needs: content-standards
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - run: npm run lint
+
+  build:
+    name: Next.js Build
+    runs-on: ubuntu-latest
+    needs: [content-standards, typecheck, lint]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.ts', '**/*.tsx') }}
+      - run: npm run build
+
+  storybook:
+    name: Storybook Build
+    runs-on: ubuntu-latest
+    needs: content-standards
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - run: npx storybook build --quiet
+
+  og-images:
+    name: OG image endpoint health
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - run: npm run build
+      - name: Start Next.js server
+        run: npx next start -p 3000 &
+      - name: Wait for server
+        run: |
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if curl -sf http://localhost:3000/api/og >/dev/null 2>&1; then
+              echo "Server up after ${i}s"
+              break
+            fi
+            sleep 1
+          done
+      - run: npm run check-og
+        env:
+          OG_CHECK_BASE_URL: http://localhost:3000
+
+  all-green:
+    name: All checks passed
+    runs-on: ubuntu-latest
+    needs: [content-standards, typecheck, lint, build, storybook, og-images]
+    if: ${{ success() }}
+    steps:
+      - run: echo "All content standards, typecheck, lint, build, Storybook, and OG checks passed."

@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Link from "next/link";
 import { BrandIcon } from "@/components/ui/BrandIcon";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
 import { getAllArticles } from "@/lib/mdx";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
 import { Metadata } from "next";
@@ -22,6 +23,7 @@ export default function Content() {
           <h1 className="text-5xl md:text-7xl tracking-tighter leading-none mb-6 mt-16">The Vault</h1>
           <p className="text-xl text-muted max-w-2xl">No articles found.</p>
         </main>
+        <DisclaimerBanner />
         <Footer />
       </>
     );
@@ -98,6 +100,7 @@ export default function Content() {
            <NewsletterForm />
         </div>
       </main>
+      <DisclaimerBanner />
       <Footer />
     </>
   );

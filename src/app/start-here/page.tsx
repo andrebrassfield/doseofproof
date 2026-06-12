@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
 import { TimelineScrubber } from "@/components/ui/TimelineScrubber";
 
 export const metadata: Metadata = {
@@ -175,6 +176,7 @@ export default function StartHerePage() {
           </div>
         </section>
       </main>
+      <DisclaimerBanner />
       <Footer />
     </>
   );
