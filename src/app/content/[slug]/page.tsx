@@ -88,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 Get the exact supplements, peptides, and advanced testing guides I use to maintain remission.
               </p>
             </div>
-            <a href="https://shop.doseofproof.com" className="inline-flex h-12 items-center justify-center rounded-lg bg-white px-8 text-sm font-bold text-black transition-colors hover:bg-white/90 shrink-0">
+            <a href="/shop" className="inline-flex h-12 items-center justify-center rounded-lg bg-white px-8 text-sm font-bold text-black transition-colors hover:bg-white/90 shrink-0">
               Visit Store →
             </a>
           </div>

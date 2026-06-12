@@ -2,26 +2,27 @@ import { getArticleBySlug, getAllArticles, getRelatedArticles, CATEGORIES } from
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
+import { AnalyticsTracker } from "@/components/ui/AnalyticsTracker";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Metadata } from "next";
 import Link from "next/link";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 
+type BlogPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export async function generateStaticParams() {
   const articles = getAllArticles();
   return articles
-    .filter((a) => a.meta.category && a.meta.slug)
+    .filter((a) => a.meta.slug)
     .map((a) => ({
-      category: a.meta.category,
       slug: a.meta.slug,
     }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ category: string; slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) return {};
@@ -33,7 +34,7 @@ export async function generateMetadata({
     openGraph: {
       title: article.meta.title,
       description: article.meta.description,
-      images: ["/og-image.png"],
+      images: [`/api/og?title=${encodeURIComponent(article.meta.title)}&category=${encodeURIComponent(CATEGORIES[article.meta.category] || "ARTICLE")}&description=${encodeURIComponent(article.meta.description)}`],
       type: "article",
       publishedTime: article.meta.publishedAt,
     },
@@ -41,7 +42,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: article.meta.title,
       description: article.meta.description,
-      images: ["/og-image.png"],
+      images: [`/api/og?title=${encodeURIComponent(article.meta.title)}&category=${encodeURIComponent(CATEGORIES[article.meta.category] || "ARTICLE")}&description=${encodeURIComponent(article.meta.description)}`],
     },
   };
 }
@@ -62,21 +63,17 @@ function extractTOC(content: string): { id: string; text: string }[] {
   return toc;
 }
 
-export default async function BlogArticlePage({
-  params,
-}: {
-  params: Promise<{ category: string; slug: string }>;
-}) {
-  const { category, slug } = await params;
+export default async function FlatBlogArticlePage({ params }: BlogPageProps) {
+  const { slug } = await params;
   const article = getArticleBySlug(slug);
 
-  if (!article || article.meta.category !== category) {
+  if (!article) {
     notFound();
   }
 
   const toc = extractTOC(article.content);
-  const related = getRelatedArticles(slug, category, 3);
-  const categoryName = CATEGORIES[category] || category;
+  const related = getRelatedArticles(slug, article.meta.category, 3);
+  const categoryName = CATEGORIES[article.meta.category] || article.meta.category;
 
   const components = {
     h1: (props: any) => (
@@ -152,6 +149,70 @@ export default async function BlogArticlePage({
     ),
   };
 
+  // Structured Data (JSON-LD Article + Breadcrumbs)
+  const jsonLdGraph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `https://doseofproof.com/blogs/${slug}#article`,
+        "isPartOf": {
+          "@id": `https://doseofproof.com/blogs/${slug}#webpage`
+        },
+        "headline": article.meta.title,
+        "description": article.meta.description,
+        "image": `https://doseofproof.com/api/og?title=${encodeURIComponent(article.meta.title)}&category=${encodeURIComponent(CATEGORIES[article.meta.category] || "ARTICLE")}&description=${encodeURIComponent(article.meta.description)}`,
+        "datePublished": article.meta.publishedAt,
+        "author": {
+          "@type": "Person",
+          "name": "Andre Brassfield",
+          "url": "https://doseofproof.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Dose of Proof",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://doseofproof.com/icon.svg"
+          }
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://doseofproof.com/blogs/${slug}#webpage`,
+        "url": `https://doseofproof.com/blogs/${slug}`,
+        "name": article.meta.title,
+        "breadcrumb": {
+          "@id": `https://doseofproof.com/blogs/${slug}#breadcrumb`
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://doseofproof.com/blogs/${slug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://doseofproof.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://doseofproof.com/blogs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": article.meta.title,
+            "item": `https://doseofproof.com/blogs/${slug}`
+          }
+        ]
+      }
+    ]
+  };
+
   // FAQ Schema JSON-LD
   const faqSchema =
     article.meta.faqs && article.meta.faqs.length > 0
@@ -171,26 +232,24 @@ export default async function BlogArticlePage({
 
   return (
     <>
+      <AnalyticsTracker event="article_page_view" params={{ article: slug }} />
       <Navbar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
+      />
       {faqSchema && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
-      <main className="flex-1 pt-32 pb-24">
+      <main id="main-content" className="flex-1 pt-32 pb-24">
         <article className="max-w-3xl mx-auto px-6 lg:px-12">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-muted mb-8">
             <Link href="/blogs" className="hover:text-accent transition-colors">
               Blog
-            </Link>
-            <span>/</span>
-            <Link
-              href={`/blogs/${category}`}
-              className="hover:text-accent transition-colors"
-            >
-              {categoryName}
             </Link>
             <span>/</span>
             <span className="text-white/60 truncate max-w-[200px]">
@@ -298,8 +357,8 @@ export default async function BlogArticlePage({
                         target="_blank"
                         rel="noopener noreferrer"
                         data-affiliate={product.name
-                          .toLowerCase()
-                          .replace(/[^a-z0-9]/g, "-")}
+                           .toLowerCase()
+                           .replace(/[^a-z0-9]/g, "-")}
                         className="text-accent text-sm font-bold hover:underline shrink-0"
                       >
                         View Source →
@@ -322,9 +381,9 @@ export default async function BlogArticlePage({
                 Get the exact supplements, peptides, and advanced testing guides I use to maintain remission.
               </p>
             </div>
-            <a href="https://shop.doseofproof.com" className="inline-flex h-12 items-center justify-center rounded-lg bg-white px-8 text-sm font-bold text-black transition-colors hover:bg-white/90 shrink-0">
+            <Link href="/shop" className="inline-flex h-12 items-center justify-center rounded-lg bg-white px-8 text-sm font-bold text-black transition-colors hover:bg-white/90 shrink-0">
               Visit Store →
-            </a>
+            </Link>
           </div>
 
           {/* Medical Disclaimer */}
@@ -356,7 +415,7 @@ export default async function BlogArticlePage({
                 {related.map((r) => (
                   <Link
                     key={r.meta.slug}
-                    href={`/blogs/${r.meta.category}/${r.meta.slug}`}
+                    href={`/blogs/${r.meta.slug}`}
                     className="group flex items-center justify-between p-6 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
                   >
                     <div>
@@ -378,6 +437,7 @@ export default async function BlogArticlePage({
         </article>
       </main>
       <Footer />
+      <DisclaimerBanner />
     </>
   );
 }

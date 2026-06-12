@@ -5,11 +5,29 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
+import { DisclaimerBanner } from "@/components/ui/DisclaimerBanner";
+import { ProtocolCalculator } from "@/components/ui/ProtocolCalculator";
 
 export const metadata: Metadata = {
   title: "Protocol Vault: What Dre Is Actually Doing",
-  description:
-    "The living Dose of Proof protocol vault for CCI, mold recovery, vagal tone, MCAS, supplements, and tracking.",
+  description: "The living Dose of Proof protocol vault for CCI, mold recovery, vagal tone, MCAS, supplements, and tracking.",
+  openGraph: {
+    title: "Protocol Vault: What Dre Is Actually Doing",
+    description: "The living Dose of Proof protocol vault for CCI, mold recovery, vagal tone, MCAS, supplements, and tracking.",
+    images: [
+      {
+        url: "/api/og?title=Protocol+Vault%3A+What+Dre+Is+Actually+Doing&category=VAULT&description=The+living+Dose+of+Proof+protocol+vault+for+CCI%2C+mold+recovery%2C+vagal+tone%2C+MCAS%2C+supplements%2C+and+tracking.",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Protocol Vault: What Dre Is Actually Doing",
+    description: "The living Dose of Proof protocol vault for CCI, mold recovery, vagal tone, MCAS, supplements, and tracking.",
+    images: ["/api/og?title=Protocol+Vault%3A+What+Dre+Is+Actually+Doing&category=VAULT&description=The+living+Dose+of+Proof+protocol+vault+for+CCI%2C+mold+recovery%2C+vagal+tone%2C+MCAS%2C+supplements%2C+and+tracking."],
+  },
 };
 
 const protocolTracks = [
@@ -40,10 +58,46 @@ const offers = [
 ];
 
 export default function ProtocolVaultPage() {
+  const vaultSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Dose of Proof Protocol Vault",
+    "description": "The living Dose of Proof protocol vault for CCI, mold recovery, vagal tone, MCAS, supplements, and tracking.",
+    "url": "https://doseofproof.com/protocol-vault",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Protocol Tracks",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Structure",
+          "description": "Upper cervical care, curve restoration, posture constraints, and what changes after each adjustment."
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Inflammation",
+          "description": "MCAS, histamine load, mold detox sequencing, binders, and the symptoms that move first."
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Recovery Output",
+          "description": "HRV, sleep, symptom trend, nervous-system capacity, and the daily dashboard that keeps the story honest."
+        }
+      ]
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(vaultSchema) }}
+      />
       <Navbar />
-      <main className="flex-1 pt-28">
+      <main id="main-content" className="flex-1 pt-28">
         <section className="px-6 lg:px-12 py-20 border-b border-white/10 bg-background">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-center">
             <div>
@@ -105,6 +159,22 @@ export default function ProtocolVaultPage() {
           </div>
         </section>
 
+        {/* PROTOCOL CALCULATOR */}
+        <section className="px-6 lg:px-12 py-20 bg-background border-t border-white/5 scroll-mt-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-10 text-center">
+              <span className="text-accent font-mono text-[10.5px] uppercase tracking-[0.22em] mb-4 block">
+                Self-Assessment Diagnostic
+              </span>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">Identify Your Biological Entry Point</h2>
+              <p className="text-muted text-sm max-w-xl mx-auto">
+                Are your symptoms structural, environmental, or autonomic? Take this quick assessment to map your symptoms to the correct starting protocol.
+              </p>
+            </div>
+            <ProtocolCalculator />
+          </div>
+        </section>
+
         <section className="px-6 lg:px-12 py-20 bg-background">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 items-start">
             <div>
@@ -137,6 +207,7 @@ export default function ProtocolVaultPage() {
         </section>
       </main>
       <Footer />
+      <DisclaimerBanner />
     </>
   );
 }

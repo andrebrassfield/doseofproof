@@ -8,6 +8,8 @@ import { RevealStagger, RevealItem } from "@/components/ui/RevealStagger";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
+import { ScanViewer } from "@/components/ui/ScanViewer";
+import { DashboardPreview } from "@/components/ui/DashboardPreview";
 
 const commandCenterMetrics = [
   { label: "Root causes mapped", value: "3", detail: "CCI, mold, mast cells" },
@@ -100,10 +102,70 @@ export default function Home() {
     return () => ctx?.revert();
   }, []);
 
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://doseofproof.com/#person",
+        "name": "Andre Brassfield",
+        "url": "https://doseofproof.com",
+        "sameAs": [
+          "https://x.com/andrebrassfield",
+          "https://x.com/doseofproof"
+        ],
+        "jobTitle": "Health Optimization Researcher",
+        "description": "Documenting the recovery terrain of CCI, MCAS, mold recovery, and evidence-backed health optimization."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://doseofproof.com/#website",
+        "url": "https://doseofproof.com",
+        "name": "Dose of Proof",
+        "publisher": { "@id": "https://doseofproof.com/#person" }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://doseofproof.com/#proof-cards",
+        "name": "Verified Personal Proof Cards",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "C1-C2 Instability (TyTron Scan Proof)",
+            "description": "Confirmed craniocervical instability with TyTron paraspinal infrared scans showing vagus nerve irritation."
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "MCAS & Histamine Panel",
+            "description": "Mast cell activation driven by structural failure and environmental toxins."
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "4 Years Hidden Mold Exposure",
+            "description": "Lived in a hidden moldy house that overlapped with high mycotoxin burden."
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Loss of Cervical Curve (X-Ray Proof)",
+            "description": "X-ray confirmed mechanical loss of normal curve, causing constant inflammatory guarding."
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
+      />
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* HERO SECTION */}
         <section className="min-h-[100dvh] flex flex-col md:flex-row relative">
           <div className="flex-1 flex flex-col justify-center px-6 lg:px-16 xl:px-24 pt-24 md:pt-0 max-w-4xl z-10">
@@ -219,6 +281,48 @@ export default function Home() {
           </div>
         </section>
 
+        {/* INTERACTIVE SCAN EXPLORER */}
+        <section className="py-12 px-6 lg:px-12 bg-background relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-10 text-center md:text-left">
+              <span className="text-accent font-mono text-[10.5px] uppercase tracking-[0.22em] mb-3 block">
+                Interactive Biological Data
+              </span>
+              <h2 className="text-3xl md:text-4xl tracking-tighter">Explore the paraspinal thermal scan</h2>
+              <p className="text-muted text-sm mt-2 max-w-xl">
+                Hover or click coordinates on the TyTron infrared scan to view paraspinal thermographic values and vagal nervous system signals.
+              </p>
+            </div>
+            <ScanViewer
+              imageSrc="/marketing-assets/scans/tytron-scan.png"
+              altText="TyTron Paraspinal Thermography Scan"
+              hotspots={[
+                {
+                  id: "vagus-nerve-base",
+                  top: "25%",
+                  left: "50%",
+                  title: "Vagus Nerve Base (CN X)",
+                  description: "Irritation at the occipitoatlantal junction blocks anti-inflammatory vagal signaling."
+                },
+                {
+                  id: "thermal-asymmetry",
+                  top: "60%",
+                  left: "45%",
+                  title: "Asymmetric Temperature Spikes",
+                  description: "A thermal differential of 1.4°C indicates severe paraspinal autonomic guarding."
+                },
+                {
+                  id: "c1-c2-displacement",
+                  top: "40%",
+                  left: "55%",
+                  title: "C1-C2 Translation",
+                  description: "Rotated atlas axis vertebra creates chronic pressure on the adjacent neurovascular structures."
+                }
+              ]}
+            />
+          </div>
+        </section>
+
         {/* THE PROBLEM SECTION */}
         {/* THE PROBLEM SECTION */}
         <section className="py-24 px-6 lg:px-12 bg-zinc-950 border-y border-white/5 scan-lock-container">
@@ -269,34 +373,7 @@ export default function Home() {
             </div>
 
             <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-6 items-stretch">
-              <div className="border border-white/10 rounded-2xl overflow-hidden bg-zinc-950/80">
-                <div className="relative aspect-[16/10] bg-black">
-                  <Image
-                    src="/marketing-assets/images/personal-proof/proof-dashboard-mockup.png"
-                    alt="Dose of Proof recovery dashboard"
-                    fill
-                    sizes="(min-width: 1024px) 55vw, 100vw"
-                    className="object-cover opacity-90 grayscale hover:grayscale-0 transition-all duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
-                  <div className="absolute left-5 bottom-5 right-5 flex flex-wrap gap-2">
-                    {["HRV", "Sleep", "Pain", "Histamine", "Adjustments"].map((label) => (
-                      <span key={label} className="rounded-full border border-accent/30 bg-black/60 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-accent">
-                        {label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-3 border-t border-white/10">
-                  {commandCenterMetrics.map((metric) => (
-                    <div key={metric.label} className="p-5 border-b sm:border-b-0 sm:border-r last:border-r-0 border-white/10">
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-3">{metric.label}</p>
-                      <p className="text-3xl font-bold tracking-tight text-accent mb-1">{metric.value}</p>
-                      <p className="text-xs text-muted">{metric.detail}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <DashboardPreview />
 
               <div className="grid gap-4">
                 {commandCenterTracks.map((track) => (

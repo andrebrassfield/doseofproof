@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /shop/cart
+Disallow: /shop/checkout
 
 Sitemap: https://doseofproof.com/sitemap.xml

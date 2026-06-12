@@ -6,10 +6,14 @@ import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { Button } from "@/components/ui/Button";
 
+import { useRouter } from "next/navigation";
+import { track } from "@/lib/analytics";
+
 export default function LeadMagnet() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,11 +22,13 @@ export default function LeadMagnet() {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, magnet: "start-here" }),
       });
       if (res.ok) {
         setSuccess(true);
+        track('lead_magnet_download', { magnet: 'start-here', source: 'general-hero' });
         window.open('/marketing-assets/The_First_30_Days_Mold_Detox_Checklist.pdf', '_blank');
+        router.push("/lead-magnet/start-here/thank-you");
       } else {
         alert("Something went wrong. Please try again.");
       }
@@ -126,7 +132,7 @@ export default function LeadMagnet() {
                 Skip the guesswork. Get the exact supplements, peptides, and advanced testing guides I use to maintain remission.
               </p>
             </div>
-            <Button href="https://shop.doseofproof.com" size="lg" className="shrink-0">
+            <Button href="/shop" size="lg" className="shrink-0">
               Shop the Protocol →
             </Button>
           </div>

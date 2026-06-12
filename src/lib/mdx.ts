@@ -120,3 +120,53 @@ export function getRelatedArticles(currentSlug: string, category: string, limit:
     .filter((a) => a.meta.category === category)
     .slice(0, limit);
 }
+
+const testsDirectory = path.join(process.cwd(), 'src/content/tests');
+
+export type TestMeta = {
+  title: string;
+  intent: string;
+  category: string;
+  stage: string;
+  whyItMatters: string;
+  whatItCanShow: string[];
+  image: string;
+  icon: string;
+  affiliateAngle: string;
+  nextTestSlug?: string;
+  faqs?: FAQ[];
+};
+
+export type TestContent = {
+  meta: TestMeta;
+  content: string;
+};
+
+export function getTestBySlug(slug: string): TestContent | null {
+  const realSlug = slug.replace(/\.mdx$/, '');
+  const fullPath = path.join(testsDirectory, `${realSlug}.mdx`);
+  
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+  
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+  
+  return {
+    meta: {
+      title: data.title || '',
+      intent: data.intent || '',
+      category: data.category || '',
+      stage: data.stage || '',
+      whyItMatters: data.whyItMatters || '',
+      whatItCanShow: data.whatItCanShow || [],
+      image: data.image || '',
+      icon: data.icon || '',
+      affiliateAngle: data.affiliateAngle || '',
+      nextTestSlug: data.nextTestSlug || '',
+      faqs: data.faqs || [],
+    },
+    content,
+  };
+}
