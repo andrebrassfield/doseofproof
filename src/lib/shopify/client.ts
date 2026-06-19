@@ -1,62 +1,179 @@
-import { GraphQLClient } from "graphql-request";
+// Shopify Storefront API Client
+// Configure with your Storefront Access Token
 
-const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "";
+const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "dose-of-proof-landing-page-cy8hg.myshopify.com";
 const SHOPIFY_STOREFRONT_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "";
+const SHOPIFY_API_VERSION = "2024-10";
 
-if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_STOREFRONT_TOKEN) {
-  console.warn("Shopify credentials not configured. Set NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN and NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN");
-}
+export async function shopifyFetch<T>(
+  query: string,
+  variables?: Record<string, unknown>
+): Promise<T> {
+  const endpoint = `https://${SHOPIFY_STORE_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 
-export const shopifyClient = new GraphQLClient(
-  `https://${SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`,
-  {
+  const response = await fetch(endpoint, {
+    method: "POST",
     headers: {
-      "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_TOKEN,
       "Content-Type": "application/json",
+      "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_TOKEN,
     },
+    body: JSON.stringify({ query, variables }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Shopify API error: ${response.status}`);
   }
-);
 
-export interface ShopifyProduct {
-  id: string;
-  title: string;
-  description: string;
-  handle: string;
-  priceRange: {
-    minVariantPrice: {
-      amount: string;
-      currencyCode: string;
-    };
-  };
-  images: {
-    edges: Array<{
-      node: {
-        url: string;
-        altText: string;
-      };
-    }>;
-  };
-  variants: {
-    edges: Array<{
-      node: {
-        id: string;
-        availableForSale: boolean;
-        priceV2: {
-          amount: string;
-          currencyCode: string;
-        };
-      };
-    }>;
-  };
+  const json = await response.json();
+
+  if (json.errors) {
+    throw new Error(json.errors[0].message);
+  }
+
+  return json.data;
 }
 
-export interface ShopifyCollection {
-  id: string;
-  title: string;
-  handle: string;
-  products: {
-    edges: Array<{
-      node: ShopifyProduct;
-    }>;
-  };
-}
+// Product Queries
+export const GET_PRODUCTS = `
+  query GetProducts($first: Int!) {
+    products(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+          description
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_PRODUCT_BY_HANDLE = `
+  query GetProductByHandle($handle: String!) {
+    productByHandle(handle: $handle) {
+      id
+      title
+      handle
+      description
+      descriptionHtml
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      images(first: 5) {
+        edges {
+          node {
+            url
+            altText
+          }
+        }
+      }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            priceV2 {
+              amount
+              currencyCode
+            }
+            availableForSale
+          }
+        }
+      }
+    }
+  }
+`;
+
+// Cart Mutations
+export const CREATE_CART = `
+  mutation CreateCart($input: CartInput!) {
+    cartCreate(input: $input) {
+      cart {
+        id
+        checkoutUrl
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  title
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ADD_TO_CART = `
+  mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!) {
+    cartLinesAdd(cartId: $cartId, lines: $lines) {
+      cart {
+        id
+        checkoutUrl
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  title
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+// Collection Queries
+export const GET_COLLECTIONS = `
+  query GetCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+          image {
+            url
+            altText
+          }
+        }
+      }
+    }
+  }
+`;
