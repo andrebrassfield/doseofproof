@@ -93,6 +93,21 @@ export const leadMagnets: Record<string, LeadMagnetData> = {
     downloadUrl: "/marketing-assets/The_First_30_Days_Mold_Detox_Checklist.pdf",
     metaTitle: "Cervical Imaging Decision Tree | Dose of Proof",
     metaDesc: "Download the free cervical imaging decision tree to guide your upper neck diagnostics."
+  },
+  "peptide-tracker": {
+    title: "2026 Safe Sourcing Peptide Tracker",
+    subtitle: "Compliance-First Sourcing Guide",
+    description: "The only peptide sourcing guide that prioritizes legal compliance. Map every compound to its FDA status, compounding pharmacy pathway, and telehealth provider network.",
+    benefits: [
+      "FDA status tracker for 20+ popular peptides (Golden Zone vs Danger Zone)",
+      "PCAB-accredited 503A/503B pharmacy directory",
+      "Telehealth provider network with prescribing authority",
+      "Compliance-first sourcing checklist - never buy from gray market again"
+    ],
+    image: "/marketing-assets/images/proof-cards/proof-mycotoxin-card-1080x1080.png",
+    downloadUrl: "/marketing-assets/peptide-tracker-preview.pdf",
+    metaTitle: "2026 Safe Sourcing Peptide Tracker | Dose of Proof",
+    metaDesc: "Download the free compliance-first peptide sourcing guide with FDA status tracking and PCAB pharmacy directory."
   }
 };
 
