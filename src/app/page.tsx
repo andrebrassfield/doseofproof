@@ -10,6 +10,8 @@ import { Footer } from "@/components/layout/Footer";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { ScanViewer } from "@/components/ui/ScanViewer";
 import { DashboardPreview } from "@/components/ui/DashboardPreview";
+import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
+import { HomepageCapture } from "@/components/ui/HomepageCapture";
 
 const commandCenterMetrics = [
   { label: "Root causes mapped", value: "3", detail: "CCI, mold, mast cells" },
@@ -514,6 +516,8 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <HomepageCapture variant="inline" />
+      <ExitIntentPopup />
       <Footer />
     </>
   );
