@@ -16,6 +16,9 @@ export async function shopifyFetch<T>(
     headers: {
       "Content-Type": "application/json",
       "Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_TOKEN,
+    },
+    body: JSON.stringify({ query, variables }),
+  });
 
   if (!response.ok) {
     throw new Error(`Shopify API error: ${response.status}`);
