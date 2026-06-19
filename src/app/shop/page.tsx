@@ -4,48 +4,59 @@ import { Button } from "@/components/ui/Button";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import Link from "next/link";
 import { Metadata } from "next";
+import { shopifyFetch, GET_PRODUCTS } from "@/lib/shopify/client";
+
+interface ShopifyImage {
+  url: string;
+  altText: string | null;
+}
+
+interface ShopifyPrice {
+  amount: string;
+  currencyCode: string;
+}
+
+interface ShopifyProduct {
+  id: string;
+  title: string;
+  handle: string;
+  priceRange: {
+    minVariantPrice: ShopifyPrice;
+  };
+  images: {
+    edges: { node: ShopifyImage }[];
+  };
+}
 
 export const metadata: Metadata = {
   title: "Shop | Dose of Proof",
   description: "Evidence-first health protocols, peptide databases, and recovery tools.",
 };
 
-const products = [
-  {
-    id: "peptide-database",
-    title: "Peptide Protocol Database",
-    price: "$29/mo",
-    description: "Monthly access to dosing protocols, reconstitution guides, and verified sourcing links.",
-    icon: "database",
-    badge: "Most Popular",
-  },
-  {
-    id: "doctors-miss-guide",
-    title: "What Doctors Miss Guide",
-    price: "$47",
-    description: "The 26 tests your doctor won't order — with functional ranges and CPT codes.",
-    icon: "test-tube",
-    badge: null,
-  },
-  {
-    id: "mold-detox",
-    title: "Mold Detox Protocol",
-    price: "$67",
-    description: "90-day systematic protocol for mold exposure recovery with tracking templates.",
-    icon: "shield",
-    badge: null,
-  },
-  {
-    id: "30-day-mold-detox",
-    title: "30-Day Mold Detox Program",
-    price: "$97",
-    description: "Guided program with daily protocols, supplement stacks, and progress tracking.",
-    icon: "calendar",
-    badge: "New",
-  },
-];
+const iconMap: Record<string, string> = {
+  "what-doctors-miss-the-complete-testing-guide": "test-tube",
+  "30-day-mold-detox-protocol": "calendar",
+  "peptide-protocol-database": "database",
+  "mold-detox-protocol": "shield",
+  "what-doctors-miss": "test-tube",
+  "doctors-miss-guide": "filecode",
+};
 
-export default function ShopPage() {
+async function getProducts(): Promise<ShopifyProduct[]> {
+  try {
+    const data = await shopifyFetch<{ products: { edges: { node: ShopifyProduct }[] } }>(
+      GET_PRODUCTS,
+      { first: 10 }
+    );
+    return data.products.edges.map((e) => e.node);
+  } catch {
+    return [];
+  }
+}
+
+export default async function ShopPage() {
+  const products = await getProducts();
+
   return (
     <>
       <Navbar />
@@ -67,34 +78,30 @@ export default function ShopPage() {
 
           {/* Product Grid */}
           <div className="grid md:grid-cols-2 gap-6">
-            {products.map((product) => (
-              <Link
-                key={product.id}
-                href={`/shop/${product.id}`}
-                className="group block border border-white/10 rounded-2xl p-8 bg-zinc-950 hover:border-accent/30 transition-all duration-300"
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <BrandIcon id={product.icon} className="w-10 h-10 text-accent" />
-                  {product.badge && (
-                    <span className="px-3 py-1 text-xs font-mono uppercase tracking-wider bg-accent/10 text-accent rounded-full">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-                <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
-                  {product.title}
-                </h2>
-                <p className="text-muted mb-6 leading-relaxed">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-accent">{product.price}</span>
-                  <Button variant="secondary" size="sm">
-                    View Details →
-                  </Button>
-                </div>
-              </Link>
-            ))}
+            {products.map((product) => {
+              const icon = iconMap[product.handle] ?? "package";
+              const price = product.priceRange?.minVariantPrice?.amount ?? "0";
+              return (
+                <Link
+                  key={product.id}
+                  href={`/shop/${product.handle}`}
+                  className="group block border border-white/10 rounded-2xl p-8 bg-zinc-950 hover:border-accent/30 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <BrandIcon id={icon} className="w-10 h-10 text-accent" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
+                    {product.title}
+                  </h2>
+                  <div className="flex items-center justify-between mt-6">
+                    <span className="text-2xl font-bold text-accent">${price}</span>
+                    <Button variant="secondary" size="sm">
+                      View Details →
+                    </Button>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           {/* Trust Signals */}
