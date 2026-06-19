@@ -14,18 +14,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons", "@radix-ui/react-slot"],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/shop",
-        destination: "https://shop.doseofproof.com",
-      },
-      {
-        source: "/shop/:path*",
-        destination: "https://shop.doseofproof.com/:path*",
-      },
-    ];
-  },
 };
 
 export default nextConfig;
