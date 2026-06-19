@@ -6,10 +6,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { shopifyFetch, GET_PRODUCTS } from "@/lib/shopify/client";
 
-interface ShopifyImage {
-  url: string;
-  altText: string | null;
-}
+export const dynamic = "force-dynamic";
 
 interface ShopifyPrice {
   amount: string;
@@ -20,12 +17,8 @@ interface ShopifyProduct {
   id: string;
   title: string;
   handle: string;
-  priceRange: {
-    minVariantPrice: ShopifyPrice;
-  };
-  images: {
-    edges: { node: ShopifyImage }[];
-  };
+  priceRange: { minVariantPrice: ShopifyPrice };
+  images: { edges: { node: { url: string; altText: string | null } }[] };
 }
 
 export const metadata: Metadata = {
@@ -42,27 +35,25 @@ const iconMap: Record<string, string> = {
   "doctors-miss-guide": "filecode",
 };
 
-async function getProducts(): Promise<ShopifyProduct[]> {
-  try {
-    const data = await shopifyFetch<{ products: { edges: { node: ShopifyProduct }[] } }>(
-      GET_PRODUCTS,
-      { first: 10 }
-    );
-    return data.products.edges.map((e) => e.node);
-  } catch {
-    return [];
-  }
-}
-
 export default async function ShopPage() {
-  const products = await getProducts();
+  let products: ShopifyProduct[] = [];
+  if (process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN) {
+    try {
+      const data = await shopifyFetch<{ products: { edges: { node: ShopifyProduct }[] } }>(
+        GET_PRODUCTS,
+        { first: 10 }
+      );
+      products = data.products.edges.map((e) => e.node);
+    } catch {
+      products = [];
+    }
+  }
 
   return (
     <>
       <Navbar />
       <main className="flex-1 pt-32 pb-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
-          {/* Header */}
           <div className="mb-16">
             <span className="text-accent font-mono text-[10.5px] uppercase tracking-[0.22em] mb-4 block">
               Shop
@@ -76,40 +67,30 @@ export default async function ShopPage() {
             </p>
           </div>
 
-          {/* Product Grid */}
           <div className="grid md:grid-cols-2 gap-6">
-            {products.map((product) => {
-              const icon = iconMap[product.handle] ?? "package";
-              const price = product.priceRange?.minVariantPrice?.amount ?? "0";
-              return (
-                <Link
-                  key={product.id}
-                  href={`/shop/${product.handle}`}
-                  className="group block border border-white/10 rounded-2xl p-8 bg-zinc-950 hover:border-accent/30 transition-all duration-300"
-                >
-                  <div className="flex items-start justify-between mb-6">
-                    <BrandIcon id={icon} className="w-10 h-10 text-accent" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
-                    {product.title}
-                  </h2>
-                  <div className="flex items-center justify-between mt-6">
-                    <span className="text-2xl font-bold text-accent">${price}</span>
-                    <Button variant="secondary" size="sm">
-                      View Details →
-                    </Button>
-                  </div>
-                </Link>
-              );
-            })}
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/shop/${product.handle}`}
+                className="group block border border-white/10 rounded-2xl p-8 bg-zinc-950 hover:border-accent/30 transition-all duration-300"
+              >
+                <BrandIcon id={iconMap[product.handle] ?? "package"} className="w-10 h-10 text-accent mb-6" />
+                <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
+                  {product.title}
+                </h2>
+                <div className="flex items-center justify-between mt-6">
+                  <span className="text-2xl font-bold text-accent">${product.priceRange?.minVariantPrice?.amount ?? "0"}</span>
+                  <Button variant="secondary" size="sm">View Details →</Button>
+                </div>
+              </Link>
+            ))}
           </div>
 
-          {/* Trust Signals */}
           <div className="mt-16 grid md:grid-cols-3 gap-6">
             <div className="text-center p-6">
               <BrandIcon id="checkmark-shield" className="w-8 h-8 text-accent mx-auto mb-4" />
               <h3 className="font-bold text-white mb-2">30-Day Guarantee</h3>
-              <p className="text-sm text-muted">Full refund if you don't find value.</p>
+              <p className="text-sm text-muted">Full refund if you don&apos;t find value.</p>
             </div>
             <div className="text-center p-6">
               <BrandIcon id="lock" className="w-8 h-8 text-accent mx-auto mb-4" />

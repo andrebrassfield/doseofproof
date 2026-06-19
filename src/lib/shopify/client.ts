@@ -5,6 +5,10 @@ const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "do
 const SHOPIFY_STOREFRONT_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "";
 const SHOPIFY_API_VERSION = "2024-10";
 
+if (!SHOPIFY_STOREFRONT_TOKEN) {
+  console.warn("[Shopify] Storefront token not configured. Shop features will be limited.");
+}
+
 export async function shopifyFetch<T>(
   query: string,
   variables?: Record<string, unknown>
