@@ -16,13 +16,18 @@ import Link from "next/link";
  *   • Solid yellow leading edge (warning tape)
  *   • Hard-edged yellow "EDUCATIONAL BRIDGE ONLY" stamp
  *   • Mono, condensed copy with high-contrast black background
+ *
+ * Layout note: the navbar above is `fixed` (z-50). Since fixed elements don't
+ * take flow space, this banner would render BEHIND the navbar (top half
+ * hidden). `mt-16` (64px) reserves the navbar's vertical footprint so the
+ * banner's content sits clearly below the navbar, fully visible.
  */
 export function ComplianceGate() {
   return (
     <aside
       role="note"
       aria-label="Compliance notice"
-      className="relative z-40 border-y-2 border-accent bg-background"
+      className="relative z-40 mt-16 border-y-2 border-accent bg-background"
     >
       {/* Warning-tape leading edge — 4px solid yellow */}
       <div aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-accent" />

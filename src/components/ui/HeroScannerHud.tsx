@@ -21,11 +21,22 @@ export function HeroScannerHud() {
   const reduce = useReducedMotion();
 
   // Stagger timings for the callouts — gives the "live readout" feel
+  // Repositioned so they orbit the central PROOF plate cleanly without
+  // colliding with the vertical ruler on the left edge.
   const callouts = [
-    { top: "8%",  left: "62%", label: "INFLAMMATION", value: "-86%", delay: 0.0 },
-    { top: "32%", left: "12%", label: "VAGAL TONE",   value: "+41%", delay: 0.6 },
-    { top: "55%", left: "70%", label: "HRV",          value: "+28ms", delay: 1.2 },
-    { top: "78%", left: "22%", label: "INFLAMMATION", value: "-86%", delay: 1.8 },
+    { top: "10%", left: "60%", label: "INFLAMMATION", value: "-86%",  delay: 0.0 },
+    { top: "30%", left: "55%", label: "VAGAL TONE",   value: "+41%",  delay: 0.8 },
+    { top: "70%", left: "58%", label: "HRV",          value: "+28ms", delay: 1.6 },
+    { top: "88%", left: "38%", label: "INFLAMMATION", value: "-86%",  delay: 2.4 },
+  ];
+
+  // Ruler ticks — only labels at every 25% to avoid visual clutter
+  const rulerMarks = [
+    { y: "0%",   label: "100" },
+    { y: "25%",  label: "075" },
+    { y: "50%",  label: "050" },
+    { y: "75%",  label: "025" },
+    { y: "100%", label: "000" },
   ];
 
   return (
@@ -88,20 +99,19 @@ export function HeroScannerHud() {
         />
       )}
 
-      {/* 3. Vertical ruler (left edge) */}
+      {/* 3. Vertical ruler (left edge) — sparse marks, only labels every 25% */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-accent/40 pointer-events-none" />
-      <div className="absolute left-1 top-0 bottom-0 flex flex-col justify-between py-6 pointer-events-none">
-        {Array.from({ length: 11 }).map((_, i) => (
+      <div className="absolute left-2 top-0 bottom-0 pointer-events-none">
+        {rulerMarks.map((m) => (
           <div
-            key={i}
-            className="flex items-center gap-2 text-[9px] font-mono text-accent/60 tracking-widest"
+            key={m.label}
+            className="absolute left-0 -translate-y-1/2 flex items-center gap-2"
+            style={{ top: m.y }}
           >
-            <span
-              className={`block bg-accent/60 ${
-                i % 5 === 0 ? "w-3 h-px" : "w-2 h-px"
-              }`}
-            />
-            {i % 5 === 0 && <span>{String(i * 10).padStart(2, "0")}</span>}
+            <span className="block w-3 h-px bg-accent" />
+            <span className="text-[9px] font-mono text-accent/70 tracking-widest">
+              {m.label}
+            </span>
           </div>
         ))}
       </div>

@@ -162,35 +162,46 @@ export default function Home() {
       <main id="main-content" className="flex-1">
         {/* HERO SECTION — BADASS CLINICAL SCANNER (Brand Kit v2 / 2026-06-26)
             Two-column layout:
-              • Left:  yellow mono caption, massive 4-line headline
-                       (white → yellow second half), body copy, twin CTAs.
+              • Left:  yellow mono caption, 4-line headline (white → yellow
+                       second half), body copy, twin CTAs, micro-credentials.
               • Right: <HeroScannerHud /> — DNA helix watermark (filtered yellow),
                        floating "INFLAMMATION -86%" / "VAGAL TONE +41%" callouts,
                        central PROOF plate, vertical ruler, corner brackets,
                        animated scanline.
+
+            Vertical rhythm:
+              The hero accounts for navbar (~64px) + ComplianceGate (~80px) above
+              by using `min-h-[calc(100dvh-9rem)]` so content actually fits
+              the visible viewport with proper centering. Content is wrapped
+              in `py-20` to leave breathing room top + bottom, and the headline
+              is fluid but capped lower so 5 lines never explode the column.
         */}
         <section
           aria-labelledby="hero-headline"
           className="relative bg-background overflow-hidden border-b border-stone"
         >
-          <div className="relative grid md:grid-cols-2 min-h-[100dvh]">
+          <div className="relative grid md:grid-cols-2 min-h-[calc(100dvh-9rem)]">
             {/* ── LEFT COLUMN: copy ───────────────────────────────────── */}
-            <div className="relative flex flex-col justify-center px-6 lg:px-16 xl:px-20 pt-32 md:pt-0 max-w-2xl z-10">
+            <div className="relative flex flex-col justify-center gap-5 md:gap-6 px-6 sm:px-10 lg:px-12 xl:px-16 py-16 md:py-12 z-10">
               {/* Yellow mono caption */}
-              <span className="dop-caption mb-8">
+              <span className="dop-caption">
                 Documenting The Recovery
               </span>
 
-              {/* Massive 4-line headline — white, then yellow */}
+              {/* 4-line headline — white, then yellow. Capped at 3.5rem so
+                  the longest line ("The scans told a") fits in the column
+                  at desktop widths without wrapping to 6 lines. */}
               <h1
                 id="hero-headline"
-                className="font-display font-black tracking-[-0.035em] leading-[0.95] text-[clamp(2.5rem,6vw,5.5rem)] mb-10"
+                className="font-display font-black tracking-[-0.035em] leading-[0.95] text-[clamp(1.875rem,4.2vw,3.5rem)]"
               >
                 <span className="block text-foreground">
                   Doctors told me I
                 </span>
-                <span className="block text-foreground">was fine.</span>
-                <span className="block text-accent mt-2">
+                <span className="block text-foreground">
+                  was fine.
+                </span>
+                <span className="block text-accent mt-1">
                   The scans told a
                 </span>
                 <span className="block text-accent">
@@ -199,7 +210,7 @@ export default function Home() {
               </h1>
 
               {/* Body paragraph */}
-              <p className="text-base md:text-lg text-foreground/90 max-w-[55ch] mb-10 leading-relaxed">
+              <p className="text-base md:text-lg text-foreground/85 max-w-[52ch] leading-relaxed">
                 I got tired of vague wellness advice and broken healthcare
                 incentives. After 7 months of mystery symptoms, I stopped
                 treating symptoms and started fixing the terrain. This is the
@@ -207,7 +218,7 @@ export default function Home() {
               </p>
 
               {/* Twin pill CTAs — yellow filled + yellow outlined */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Button
                   href="/about"
                   size="lg"
@@ -226,7 +237,7 @@ export default function Home() {
               </div>
 
               {/* Micro-credential strip */}
-              <div className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10.5px] md:text-xs font-mono uppercase tracking-widest text-muted">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10.5px] md:text-xs font-mono uppercase tracking-widest text-muted">
                 <span className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   Verified by TyTron + Lateral X-Ray
@@ -237,16 +248,10 @@ export default function Home() {
             </div>
 
             {/* ── RIGHT COLUMN: scanner HUD ───────────────────────────── */}
-            <div className="relative md:border-l border-stone min-h-[60vh] md:min-h-[100dvh]">
+            <div className="relative md:border-l border-stone min-h-[60vh] md:min-h-[calc(100dvh-9rem)]">
               <HeroScannerHud />
             </div>
           </div>
-
-          {/* Soft fade at the bottom for transition into next section */}
-          <div
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-background pointer-events-none z-10"
-          />
         </section>
 
         {/* THE PROOF SECTION */}
