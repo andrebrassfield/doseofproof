@@ -6,37 +6,14 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Peptide Protocol Database | Dose of Proof",
-  description: "Monthly access to the exact dosing protocols, reconstitution guides, and sourcing links for BPC-157, TB-500, GHK-Cu, and more.",
+  title: "Peptide Research Index | Dose of Proof",
+  description:
+    "A monthly-curated index of FDA briefing documents, federal advisory committee dockets, and peer-reviewed research on peptide science. Educational bridge only — no compounds sold, no dosing protocols, no sourcing.",
 };
 
 export default function PeptideDatabasePage() {
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Peptide Protocol Database",
-    "image": "https://doseofproof.com/marketing-assets/color_palette_sheet.png",
-    "description": "Monthly access to the exact dosing protocols, reconstitution guides, and sourcing links for BPC-157, TB-500, GHK-Cu, and more.",
-    "offers": {
-      "@type": "Offer",
-      "price": "29.00",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "url": "https://doseofproof.com/products/peptide-database"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "42"
-    }
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-      />
       <Navbar />
       <main className="flex-1 pt-32 pb-24">
         <article className="max-w-4xl mx-auto px-6 lg:px-12">
@@ -57,14 +34,16 @@ export default function PeptideDatabasePage() {
                 Monthly Subscription
               </span>
               <h1 className="text-5xl md:text-6xl tracking-tighter leading-[1.1] mb-6 text-white">
-                Peptide Protocol <br />
-                <span className="text-white/60">Database</span>
+                Peptide Research <br />
+                <span className="text-white/60">Index</span>
               </h1>
               <div className="text-3xl font-bold text-accent mb-6">$29<span className="text-lg text-muted font-normal">/mo</span></div>
               <p className="text-xl text-muted leading-relaxed mb-8">
-                Monthly access to the exact dosing protocols, reconstitution guides, and sourcing links for BPC-157, TB-500, GHK-Cu, and more.
+                A monthly-curated index of FDA briefing documents, federal advisory committee
+                dockets, and peer-reviewed research on peptide science. Educational bridge only —
+                no compounds sold, no dosing protocols, no sourcing.
               </p>
-              
+
               <Button href="/shop/product/peptide-protocol-database" size="lg" className="w-full md:w-auto mb-4">
                 Subscribe Now →
               </Button>
@@ -80,12 +59,12 @@ export default function PeptideDatabasePage() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  "BPC-157 & TB-500 stack for tissue repair",
-                  "GHK-Cu protocol for systemic inflammation",
-                  "Reconstitution math made simple (calculators included)",
-                  "Verified sourcing links to avoid bunk peptides",
-                  "Monthly updates on new peptide research",
-                  "Access to the private community Discord",
+                  "Monthly digest of FDA briefing documents and PCAC dockets",
+                  "Plain-English summaries of peer-reviewed peptide research",
+                  "Regulatory status tracker: 503A compounding pathway eligibility",
+                  "Telehealth provider network directory (Marek Health, Lifeforce)",
+                  "Compliance-first sourcing checklist — never buy from gray market",
+                  "Substack delivery for monthly research notes",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <BrandIcon id="check" className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -96,19 +75,27 @@ export default function PeptideDatabasePage() {
             </div>
           </div>
 
-          {/* Social Proof & Testimonial */}
-          <div className="mt-16 grid md:grid-cols-2 gap-6">
-            <div className="border border-white/10 rounded-xl p-8 bg-zinc-950/40">
-              <p className="text-white font-medium italic mb-6">
-                "The reconstitution calculator alone saved me hours of head scratchers. Sourcing links are verified and saved me from buying bunk products online."
-              </p>
-              <p className="text-accent text-sm font-bold">— Robert P., Verified Member</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-8 bg-zinc-950/40">
-              <p className="text-white font-medium italic mb-6">
-                "I used the BPC-157 and GHK-Cu stacks to support my gut mucosal lining. The dosing updates are backed by PubMed citations, which is rare to find."
-              </p>
-              <p className="text-accent text-sm font-bold">— Alyssa T., Verified Member</p>
+          {/* Compliance Banner — replaces testimonial section per hotfix/compliance-remediation-2026-06-24 */}
+          <div className="mt-16 p-8 border border-amber-500/30 rounded-2xl bg-amber-500/[0.06]">
+            <div className="flex items-start gap-3">
+              <BrandIcon id="warning" className="w-6 h-6 text-amber-400 mt-0.5 shrink-0" />
+              <div>
+                <h3 className="text-base font-bold text-amber-300 mb-2">
+                  Compliance notice
+                </h3>
+                <p className="text-sm text-amber-100/80 leading-relaxed mb-3">
+                  This index is educational research only. We do not sell compounds, provide
+                  dosing protocols, or facilitate sourcing. Any peptide access happens through
+                  board-certified physicians and 503A compounding pharmacies — never through
+                  integrated storefronts or gray-market channels.
+                </p>
+                <Link
+                  href="/medical-disclaimer"
+                  className="text-xs font-mono uppercase tracking-widest text-amber-300 hover:text-amber-200 underline underline-offset-4"
+                >
+                  Full medical disclaimer →
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -118,7 +105,9 @@ export default function PeptideDatabasePage() {
             <div>
               <h3 className="text-xl font-bold text-white mb-2">100% Satisfaction Guarantee</h3>
               <p className="text-sm text-muted">
-                Subscribe completely risk-free. Cancel anytime with a single click. If you don't find value in the research breakdowns and calculators within your first 30 days, ask for a full refund.
+                Subscribe completely risk-free. Cancel anytime with a single click. If you don't
+                find value in the research breakdowns within your first 30 days, ask for a full
+                refund.
               </p>
             </div>
           </div>
@@ -132,29 +121,21 @@ export default function PeptideDatabasePage() {
                   Medical Disclaimer
                 </h3>
                 <p className="text-xs text-muted">
-                  This database documents my personal experience and research with peptides. I am not a doctor. The information shared here is not medical advice and is not intended to diagnose, treat, cure, or prevent any disease. Peptide therapy is experimental and you should always consult your physician before use.
+                  This database documents published research and federal regulatory process.
+                  I am not a doctor. The information shared here is not medical advice and is
+                  not intended to diagnose, treat, cure, or prevent any disease. Always consult
+                  your physician before making any health decision.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Related Articles */}
+          {/* Related Articles — BPC-157 Dosage Guide cross-link removed per hotfix/compliance-remediation-2026-06-24 */}
           <div className="mt-16 border-t border-white/10 pt-12">
             <h2 className="text-2xl font-bold tracking-tight mb-8 text-white">
               Related Reading
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
-              <Link
-                href="/blogs/peptides/bpc-157-dosage-guide"
-                className="group p-6 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
-              >
-                <h3 className="text-white font-medium group-hover:text-accent transition-colors">
-                  BPC-157 Dosage Guide
-                </h3>
-                <p className="text-muted text-sm mt-2">
-                  What the research actually says about dosing.
-                </p>
-              </Link>
               <Link
                 href="/blogs/peptides/ghk-cu-mechanism"
                 className="group p-6 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
@@ -164,6 +145,17 @@ export default function PeptideDatabasePage() {
                 </h3>
                 <p className="text-muted text-sm mt-2">
                   Complete mechanism guide.
+                </p>
+              </Link>
+              <Link
+                href="/lead-magnet/peptide-tracker"
+                className="group p-6 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
+              >
+                <h3 className="text-white font-medium group-hover:text-accent transition-colors">
+                  2026 Safe Sourcing Peptide Tracker
+                </h3>
+                <p className="text-muted text-sm mt-2">
+                  Compliance-first peptide sourcing guide with FDA status tracking.
                 </p>
               </Link>
             </div>
