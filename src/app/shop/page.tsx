@@ -23,7 +23,7 @@ interface ShopifyProduct {
 
 export const metadata: Metadata = {
   title: "Shop | Dose of Proof",
-  description: "Evidence-first health protocols, peptide databases, and recovery tools.",
+  description: "Evidence-first health workbooks, research indexes, and recovery tools. Educational bridge only — no compounds sold, no dosing protocols, no sourcing.",
 };
 
 const iconMap: Record<string, string> = {
@@ -63,7 +63,9 @@ export default async function ShopPage() {
               <span className="text-white/60">Protocols</span>
             </h1>
             <p className="text-xl text-muted max-w-2xl">
-              Everything here is backed by data, not hype. Every protocol includes sourcing verification, dosing guidelines, and tracking templates.
+              Everything here is backed by data, not hype. Educational workbooks, research
+              indexes, and tracking templates — no compounds sold, no dosing protocols, no
+              sourcing. Health decisions happen with your physician.
             </p>
           </div>
 

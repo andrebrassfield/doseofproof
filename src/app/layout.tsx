@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
+import { ComplianceGate } from "@/components/compliance/ComplianceGate";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -72,6 +73,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <SmoothScroll />
+        <ComplianceGate />
         {children}
       </body>
     </html>
