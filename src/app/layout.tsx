@@ -69,7 +69,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-accent text-black font-mono text-xs uppercase tracking-widest py-3 px-6 rounded-lg z-[100] border border-accent/30 shadow-lg shadow-accent/10">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-accent text-accent-ink font-mono text-xs uppercase tracking-widest py-3 px-6 z-[100] border-2 border-accent-strong shadow-lg shadow-accent/20">
           Skip to content
         </a>
         <SmoothScroll />

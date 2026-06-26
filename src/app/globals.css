@@ -1,36 +1,187 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────────────────
+   DOSE OF PROOF — Brand Kit v2 (2026-06-26)
+   Source-of-truth palette derived from the new poster aesthetic:
+     • Black    #000000  background, ink, void
+     • Yellow   #FFD60A  warning/alert/accent (warning-yellow)
+     • White    #FFFFFF  primary text, light accents
+     • Charcoal #0A0A0A  raised surfaces (slightly lifted from black)
+     • Stone    #1C1C1C  hairline borders / cards on dark
+   The accent (`--color-accent`) was previously a lime (#C8FF00). It is now
+   warning-yellow. All downstream components that referenced `bg-accent`,
+   `text-accent`, `border-accent`, etc. will automatically pick up the new
+   color because Tailwind v4 wires CSS variables through `@theme inline`.
+   ────────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #0D0D0D;
-  --foreground: #FFFFFF;
-  --accent: #C8FF00;
-  --accent-muted: rgba(200, 255, 0, 0.15);
-  --muted: #B0B0B0;
-  --warm: #C8733A;
+  /* Brand surface tokens */
+  --background: #000000;          /* deep black — primary canvas */
+  --surface:    #0A0A0A;          /* near-black for raised cards / hero plate */
+  --surface-2:  #141414;          /* hover / inner well */
+  --stone:      #1C1C1C;          /* hairline borders, dividers */
+  --foreground: #FFFFFF;          /* primary ink */
+  --muted:      #B5B5B5;          /* secondary copy */
+
+  /* Brand accent — warning yellow */
+  --accent:        #FFD60A;       /* warning-yellow primary */
+  --accent-strong: #FFE34D;       /* highlight / hover */
+  --accent-ink:    #000000;       /* ink-on-yellow (text inside yellow boxes) */
+  --accent-muted:  rgba(255, 214, 10, 0.14);
+
+  /* Signal palette — clinical status colors (kept low-saturation, poster-ready) */
   --proof-green: #22C55E;
-  --proof-amber: #F59E0B;
-  --proof-red: #EF4444;
+  --proof-amber: #F59E0B;         /* retained for medical disclaimer chrome only */
+  --proof-red:   #EF4444;
+
+  /* Typography tokens */
+  --font-display: var(--font-geist-sans);
+  --font-sans:    var(--font-geist-sans);
+  --font-mono:    var(--font-geist-mono);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface:    var(--surface);
+  --color-surface-2:  var(--surface-2);
+  --color-stone:      var(--stone);
   --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent-muted: var(--accent-muted);
+  --color-accent:        var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-ink:    var(--accent-ink);
+  --color-accent-muted:  var(--accent-muted);
   --color-muted: var(--muted);
-  --color-warm: var(--warm);
   --color-proof-green: var(--proof-green);
   --color-proof-amber: var(--proof-amber);
-  --color-proof-red: var(--proof-red);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-proof-red:   var(--proof-red);
+  --font-sans:    var(--font-sans);
+  --font-mono:    var(--font-mono);
+  --font-display: var(--font-display);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+@layer base {
+  /* Force dark mode everywhere — site is dark-first, no light fallback. */
+  html {
+    color-scheme: dark;
+    background: var(--background);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Poster-style headings: bold, condensed, high-impact.
+     Use with `tracking-tight` and `leading-[0.95]` on hero. */
+  h1, h2, h3 {
+    font-family: var(--font-display), Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+}
+
+@layer components {
+  /* ── Poster primitives ─────────────────────────────────────────────── */
+
+  /* The signature yellow "box" treatment — used for brand labels,
+     proof tags, and any small caps label that needs to scream. */
+  .dop-yellow-box {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--accent-ink);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+
+  /* Massive clinical headline — uppercase, condensed, high-contrast. */
+  .dop-poster-headline {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 0.92;
+    color: var(--foreground);
+  }
+
+  /* Yellow underline accent for poster headlines */
+  .dop-poster-rule {
+    display: block;
+    height: 4px;
+    background: var(--accent);
+    margin-top: 1.5rem;
+    width: 6rem;
+  }
+
+  /* Stoic clinical caption — small caps mono, used in section headers */
+  .dop-caption {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+  }
+
+  /* Card surface for poster layout */
+  .dop-card {
+    background: var(--surface);
+    border: 1px solid var(--stone);
+    border-radius: 14px;
+  }
+
+  /* Hard-edged button feel — square corners for poster CTAs */
+  .dop-btn-square {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    padding: 1rem 1.75rem;
+    transition: transform 120ms ease, background 120ms ease;
+  }
+  .dop-btn-square:hover {
+    background: var(--accent-strong);
+    transform: translateY(-1px);
+  }
+
+  /* Hard-edged secondary button — black bg, yellow border */
+  .dop-btn-square-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--foreground);
+    border: 2px solid var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    padding: 0.875rem 1.625rem;
+    transition: transform 120ms ease, background 120ms ease;
+  }
+  .dop-btn-square-outline:hover {
+    background: var(--accent);
+    color: var(--accent-ink);
+    transform: translateY(-1px);
+  }
 }
 
 .scan-line-bg {

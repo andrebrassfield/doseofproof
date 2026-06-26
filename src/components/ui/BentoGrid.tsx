@@ -35,17 +35,18 @@ export function BentoGridItem({
   return (
     <div
       className={cn(
-        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black dark:border-white/[0.1] bg-white border border-transparent justify-between flex flex-col space-y-4 hover:border-accent/50",
+        // Brand Kit v2 (2026-06-26): hard-edged, charcoal-on-black, yellow hover rule
+        "row-span-1 rounded-md group/bento hover:shadow-2xl transition duration-200 p-4 bg-surface border border-stone justify-between flex flex-col space-y-4 hover:border-accent",
         className
       )}
     >
       {header}
-      <div className="group-hover/bento:translate-x-2 transition duration-200">
+      <div className="group-hover/bento:translate-x-1 transition duration-200">
         {icon}
-        <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2">
+        <div className="font-display font-bold text-white mb-2 mt-2 tracking-tight">
           {title}
         </div>
-        <div className="font-sans font-normal text-neutral-600 dark:text-muted text-sm">
+        <div className="font-sans font-normal text-muted text-sm leading-relaxed">
           {description}
         </div>
       </div>
