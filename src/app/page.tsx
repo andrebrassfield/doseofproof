@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { SafeImage as Image } from "@/components/ui/SafeImage";
 import { Button } from "@/components/ui/Button";
@@ -12,6 +12,7 @@ import { ScanViewer } from "@/components/ui/ScanViewer";
 import { DashboardPreview } from "@/components/ui/DashboardPreview";
 import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
 import { HomepageCapture } from "@/components/ui/HomepageCapture";
+import { HeroScannerHud } from "@/components/ui/HeroScannerHud";
 
 const commandCenterMetrics = [
   { label: "Root causes mapped", value: "3", detail: "CCI, mold, mast cells" },
@@ -65,16 +66,7 @@ const proofPathways = [
 ];
 
 export default function Home() {
-  const [heroVariant, setHeroVariant] = useState<string | null>(null);
-
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.requestAnimationFrame(() => {
-        const searchParams = new URLSearchParams(window.location.search);
-        setHeroVariant(searchParams.get("hero"));
-      });
-    }
-
     let ctx: any;
     (async () => {
       const { gsap } = await import('gsap');
@@ -168,143 +160,94 @@ export default function Home() {
       />
       <Navbar />
       <main id="main-content" className="flex-1">
-        {/* HERO SECTION — POSTER TREATMENT (Brand Kit v2 / 2026-06-26)
-            Visual target:
-              • Deep black background
-              • "DOSE OF PROOF" yellow-box label, top-left
-              • Massive yellow headline:
-                  UPSTREAM TERRAIN
-                  VS.
-                  DOWNSTREAM WHACK-A-MOLE
-              • Clean white subtitle: "The shift from fragmented specialists
-                to layered root-cause mapping."
-              • Keep personal proof (scans, TyTron) below as the next section.
+        {/* HERO SECTION — BADASS CLINICAL SCANNER (Brand Kit v2 / 2026-06-26)
+            Two-column layout:
+              • Left:  yellow mono caption, massive 4-line headline
+                       (white → yellow second half), body copy, twin CTAs.
+              • Right: <HeroScannerHud /> — DNA helix watermark (filtered yellow),
+                       floating "INFLAMMATION -86%" / "VAGAL TONE +41%" callouts,
+                       central PROOF plate, vertical ruler, corner brackets,
+                       animated scanline.
         */}
         <section
           aria-labelledby="hero-headline"
           className="relative bg-background overflow-hidden border-b border-stone"
         >
-          {/* Hairline yellow bracket frame — clinical/poster detail */}
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-6 left-6 w-12 h-12 border-l-2 border-t-2 border-accent" />
-            <div className="absolute top-6 right-6 w-12 h-12 border-r-2 border-t-2 border-accent" />
-            <div className="absolute bottom-6 left-6 w-12 h-12 border-l-2 border-b-2 border-accent" />
-            <div className="absolute bottom-6 right-6 w-12 h-12 border-r-2 border-b-2 border-accent" />
-          </div>
-
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-12 xl:px-20 pt-32 md:pt-40 pb-20 md:pb-28">
-            {/* Yellow box brand label */}
-            <div className="mb-10 md:mb-14">
-              <span className="dop-yellow-box text-sm md:text-base">
-                Dose of Proof
+          <div className="relative grid md:grid-cols-2 min-h-[100dvh]">
+            {/* ── LEFT COLUMN: copy ───────────────────────────────────── */}
+            <div className="relative flex flex-col justify-center px-6 lg:px-16 xl:px-20 pt-32 md:pt-0 max-w-2xl z-10">
+              {/* Yellow mono caption */}
+              <span className="dop-caption mb-8">
+                Documenting The Recovery
               </span>
-            </div>
 
-            {/* Massive two-line poster headline */}
-            <h1
-              id="hero-headline"
-              className="dop-poster-headline text-[clamp(2.75rem,8vw,7.5rem)] mb-10"
-            >
-              <span className="block">Upstream Terrain</span>
-              <span className="block text-accent">vs.</span>
-              <span className="block">Downstream<br className="md:hidden" /> Whack-a-Mole.</span>
-            </h1>
+              {/* Massive 4-line headline — white, then yellow */}
+              <h1
+                id="hero-headline"
+                className="font-display font-black tracking-[-0.035em] leading-[0.95] text-[clamp(2.5rem,6vw,5.5rem)] mb-10"
+              >
+                <span className="block text-foreground">
+                  Doctors told me I
+                </span>
+                <span className="block text-foreground">was fine.</span>
+                <span className="block text-accent mt-2">
+                  The scans told a
+                </span>
+                <span className="block text-accent">
+                  different story.
+                </span>
+              </h1>
 
-            {/* Clean white subtitle */}
-            <p className="text-xl md:text-2xl text-foreground max-w-3xl leading-snug mb-10 font-medium">
-              The shift from fragmented specialists to layered root-cause mapping.
-            </p>
+              {/* Body paragraph */}
+              <p className="text-base md:text-lg text-foreground/90 max-w-[55ch] mb-10 leading-relaxed">
+                I got tired of vague wellness advice and broken healthcare
+                incentives. After 7 months of mystery symptoms, I stopped
+                treating symptoms and started fixing the terrain. This is the
+                proof file.
+              </p>
 
-            {/* Yellow underline rule */}
-            <span className="dop-poster-rule" />
-
-            {/* Hero proof tags — clinical triage metadata */}
-            <div className="mt-12 grid sm:grid-cols-3 gap-4 max-w-4xl">
-              {[
-                { k: "Root Cause Layer", v: "C1–C2 Instability" },
-                { k: "Environmental Layer", v: "4yr Mold Exposure" },
-                { k: "Immune Layer", v: "MCAS / Histamine" },
-              ].map((tier) => (
-                <div
-                  key={tier.k}
-                  className="dop-card p-5 border-l-2 border-l-accent"
+              {/* Twin pill CTAs — yellow filled + yellow outlined */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  href="/about"
+                  size="lg"
+                  className="font-mono uppercase tracking-widest text-xs"
                 >
-                  <div className="dop-caption mb-2">{tier.k}</div>
-                  <div className="text-white font-bold text-lg tracking-tight">
-                    {tier.v}
-                  </div>
-                </div>
-              ))}
+                  Read the Full Story
+                </Button>
+                <Button
+                  href="/lead-magnet"
+                  variant="secondary"
+                  size="lg"
+                  className="font-mono uppercase tracking-widest text-xs"
+                >
+                  Download 30-Day Checklist
+                </Button>
+              </div>
+
+              {/* Micro-credential strip */}
+              <div className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10.5px] md:text-xs font-mono uppercase tracking-widest text-muted">
+                <span className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                  Verified by TyTron + Lateral X-Ray
+                </span>
+                <span className="text-stone">|</span>
+                <span>7+ months · Subject #001</span>
+              </div>
             </div>
 
-            {/* CTAs */}
-            <div className="mt-14 flex flex-col sm:flex-row gap-4">
-              <a
-                href="/start-here"
-                className="dop-btn-square text-sm md:text-base"
-              >
-                Enter the Case File →
-              </a>
-              <a
-                href="/protocol-vault"
-                className="dop-btn-square-outline text-sm md:text-base"
-              >
-                Open Protocol Vault
-              </a>
-            </div>
-
-            {/* Micro-credential footer */}
-            <div className="mt-16 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs md:text-sm font-mono uppercase tracking-widest text-muted">
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-                Verified by TyTron + Lateral X-Ray
-              </span>
-              <span className="text-stone">|</span>
-              <span>Documented Recovery · 7+ Months</span>
+            {/* ── RIGHT COLUMN: scanner HUD ───────────────────────────── */}
+            <div className="relative md:border-l border-stone min-h-[60vh] md:min-h-[100dvh]">
+              <HeroScannerHud />
             </div>
           </div>
 
-          {/* Background scan watermark — kept, desaturated for poster feel */}
+          {/* Soft fade at the bottom for transition into next section */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-center opacity-[0.08] mix-blend-luminosity grayscale pointer-events-none"
-            style={{
-              backgroundImage:
-                "url('/marketing-assets/images/hero/hero-dark-dna-watermark-1920x1080.png')",
-            }}
+            className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-background pointer-events-none z-10"
           />
         </section>
-
-        {/* ── AB / AB2 / ORIGINAL HERO (kept off-route but available via ?hero=A) ──
-            Hidden when no variant param is set; preserved so analytics tests
-            and the existing scroll-locked scan section still resolve. */}
-        {heroVariant && (
-          <section className="min-h-[100dvh] flex flex-col md:flex-row relative bg-background border-b border-stone">
-            <div className="flex-1 flex flex-col justify-center px-6 lg:px-16 xl:px-24 pt-24 md:pt-0 max-w-4xl z-10">
-              <span className="dop-caption mb-8">
-                Variant {heroVariant} — Documenting The Recovery
-              </span>
-              <h2 className="text-5xl md:text-7xl tracking-tighter leading-[1.1] mb-6">
-                {heroVariant === "B" ? (
-                  <>
-                    The body has a natural inflammation brake.<br />
-                    <span className="text-muted">Mine was broken at C1-C2.</span>
-                  </>
-                ) : (
-                  <>
-                    Doctors told me I was fine.<br />
-                    <span className="text-muted">The scans told a different story.</span>
-                  </>
-                )}
-              </h2>
-              <p className="text-lg text-muted max-w-[65ch] mb-10 leading-relaxed">
-                I got tired of vague wellness advice and broken healthcare incentives.
-                After 7 months of mystery symptoms, I stopped treating symptoms and started fixing the terrain.
-                This is the proof file.
-              </p>
-            </div>
-          </section>
-        )}
 
         {/* THE PROOF SECTION */}
         <section className="py-24 px-6 lg:px-12 bg-background relative overflow-hidden">
