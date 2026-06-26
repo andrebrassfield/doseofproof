@@ -23,11 +23,6 @@ export default function WhatDoctorsMissPage() {
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": "https://doseofproof.com/products/what-doctors-miss"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "28"
     }
   };
 

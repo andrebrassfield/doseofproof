@@ -23,11 +23,6 @@ export default function MoldDetoxPage() {
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": "https://doseofproof.com/products/mold-detox"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "19"
     }
   };
 
