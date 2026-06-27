@@ -18,19 +18,19 @@
         50% { opacity: 0.6; }
       }
       .scan-line {
-        stroke: #C8FF00;
+        stroke: #FFD60A;
         stroke-width: 2;
         animation: scanSweep 2s linear infinite;
-        filter: drop-shadow(0 0 8px #C8FF00);
+        filter: drop-shadow(0 0 8px #FFD60A);
       }
       .pulse-ring {
         fill: none;
-        stroke: #C8FF00;
+        stroke: #FFD60A;
         stroke-width: 2;
         animation: pulseGlow 1.5s ease-in-out infinite;
       }
       .reveal-text {
-        fill: #C8FF00;
+        fill: #FFD60A;
         font-family: SFMono-Regular, Consolas, Courier, monospace;
         font-size: 10px;
         font-weight: bold;
@@ -53,9 +53,9 @@
     <rect x="0" y="0" width="300" height="300" fill="none" stroke="#1a1a1a" stroke-width="1"/>
     
     <!-- Metric box -->
-    <rect x="50" y="100" width="200" height="100" fill="none" stroke="#C8FF00" stroke-width="2" rx="4"/>
+    <rect x="50" y="100" width="200" height="100" fill="none" stroke="#FFD60A" stroke-width="2" rx="4"/>
     <text x="80" y="135" fill="#FFFFFF" font-family="Arial" font-size="14">INFLAMMATION</text>
-    <text x="100" y="165" fill="#C8FF00" font-family="Arial" font-size="24" font-weight="bold">-86%</text>
+    <text x="100" y="165" fill="#FFD60A" font-family="Arial" font-size="24" font-weight="bold">-86%</text>
     
     <!-- Pulse rings around metric -->
     <circle cx="150" cy="150" class="pulse-ring"/>
@@ -73,14 +73,14 @@
     <text x="20" y="180" class="reveal-text" style="animation-delay: 0.4s;">PROOF</text>
     
     <!-- Accent line -->
-    <line x1="20" y1="200" x2="280" y2="200" stroke="#C8FF00" stroke-width="2" class="reveal-text" style="animation-delay: 0.6s;"/>
+    <line x1="20" y1="200" x2="280" y2="200" stroke="#FFD60A" stroke-width="2" class="reveal-text" style="animation-delay: 0.6s;"/>
   </g>
 
   <!-- OVERLAY 4: Scan Line Variant (Horizontal) -->
   <g id="scan-line-horizontal" transform="translate(50, 200)">
     <rect x="0" y="0" width="300" height="150" fill="none" stroke="#1a1a1a" stroke-width="1"/>
     <line class="scan-line" x1="0" y1="0" x2="0" y2="150" style="animation: scanSweep 3s linear infinite; transform-origin: 0 75px;"/>
-    <text x="80" y="80" fill="#C8FF00" font-family="Arial" font-size="14" opacity="0.6">Analyzing...</text>
+    <text x="80" y="80" fill="#FFD60A" font-family="Arial" font-size="14" opacity="0.6">Analyzing...</text>
   </g>
 
   <!-- OVERLAY 5: Multiple Pulse Rings (Data Points) -->
@@ -88,23 +88,23 @@
     <rect x="0" y="0" width="300" height="150" fill="none" stroke="#1a1a1a" stroke-width="1"/>
     
     <!-- Data point 1 -->
-    <circle cx="50" cy="50" r="8" fill="#C8FF00"/>
+    <circle cx="50" cy="50" r="8" fill="#FFD60A"/>
     <circle cx="50" cy="50" class="pulse-ring" r="15"/>
     <circle cx="50" cy="50" class="pulse-ring" r="15" style="animation-delay: 0.5s;"/>
     
     <!-- Data point 2 -->
-    <circle cx="150" cy="75" r="8" fill="#C8FF00"/>
+    <circle cx="150" cy="75" r="8" fill="#FFD60A"/>
     <circle cx="150" cy="75" class="pulse-ring" r="15"/>
     <circle cx="150" cy="75" class="pulse-ring" r="15" style="animation-delay: 0.3s;"/>
     
     <!-- Data point 3 -->
-    <circle cx="250" cy="50" r="8" fill="#C8FF00"/>
+    <circle cx="250" cy="50" r="8" fill="#FFD60A"/>
     <circle cx="250" cy="50" class="pulse-ring" r="15"/>
     <circle cx="250" cy="50" class="pulse-ring" r="15" style="animation-delay: 0.7s;"/>
     
     <!-- Connecting lines -->
-    <line x1="50" y1="50" x2="150" y2="75" stroke="#C8FF00" stroke-width="1" opacity="0.5"/>
-    <line x1="150" y1="75" x2="250" y2="50" stroke="#C8FF00" stroke-width="1" opacity="0.5"/>
+    <line x1="50" y1="50" x2="150" y2="75" stroke="#FFD60A" stroke-width="1" opacity="0.5"/>
+    <line x1="150" y1="75" x2="250" y2="50" stroke="#FFD60A" stroke-width="1" opacity="0.5"/>
   </g>
 
   <!-- OVERLAY 6: Typewriter Effect (Text Reveal) -->

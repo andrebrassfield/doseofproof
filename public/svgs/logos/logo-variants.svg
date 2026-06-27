@@ -2,8 +2,8 @@
   <defs>
     <style>
       .logo-text { fill: #FFFFFF; font-family: Arial, sans-serif; font-weight: bold; letter-spacing: 2; }
-      .logo-accent { fill: #C8FF00; }
-      .logo-icon { stroke: #C8FF00; stroke-width: 2; fill: none; }
+      .logo-accent { fill: #FFD60A; }
+      .logo-icon { stroke: #FFD60A; stroke-width: 2; fill: none; }
     </style>
   </defs>
 
@@ -69,7 +69,7 @@
     <text x="0" y="50" class="logo-text" font-size="12" opacity="0.7" letter-spacing="1">Real stories. Real proof.</text>
     
     <!-- Accent line -->
-    <line x1="0" y1="60" x2="200" y2="60" stroke="#C8FF00" stroke-width="2"/>
+    <line x1="0" y1="60" x2="200" y2="60" stroke="#FFD60A" stroke-width="2"/>
   </g>
 
   <!-- LOGO 5: Icon Badge (Circular) -->
@@ -135,7 +135,7 @@
   <!-- LOGO 9: Wordmark Compact (For Small Spaces) -->
   <g id="wordmark-compact" transform="translate(650, 300)">
     <text x="0" y="20" class="logo-text" font-size="14">DOSE OF PROOF</text>
-    <line x1="0" y1="25" x2="100" y2="25" stroke="#C8FF00" stroke-width="1.5"/>
+    <line x1="0" y1="25" x2="100" y2="25" stroke="#FFD60A" stroke-width="1.5"/>
   </g>
 
 </svg>

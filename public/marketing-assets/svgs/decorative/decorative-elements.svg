@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
   <defs>
     <style>
-      .accent-lime { stroke: #C8FF00; fill: none; }
-      .accent-lime-fill { fill: #C8FF00; }
+      .accent-lime { stroke: #FFD60A; fill: none; }
+      .accent-lime-fill { fill: #FFD60A; }
       .text-white { fill: #FFFFFF; font-family: Arial, sans-serif; }
     </style>
     <filter id="glow">
@@ -66,9 +66,9 @@
 
   <!-- DIVIDER 8: Accent Line with Fade -->
   <g id="fade-line" transform="translate(300, 300)">
-    <line x1="0" y1="20" x2="200" y2="20" stroke="#C8FF00" stroke-width="2" opacity="1"/>
-    <line x1="200" y1="20" x2="300" y2="20" stroke="#C8FF00" stroke-width="2" opacity="0.5"/>
-    <line x1="300" y1="20" x2="400" y2="20" stroke="#C8FF00" stroke-width="2" opacity="0.2"/>
+    <line x1="0" y1="20" x2="200" y2="20" stroke="#FFD60A" stroke-width="2" opacity="1"/>
+    <line x1="200" y1="20" x2="300" y2="20" stroke="#FFD60A" stroke-width="2" opacity="0.5"/>
+    <line x1="300" y1="20" x2="400" y2="20" stroke="#FFD60A" stroke-width="2" opacity="0.2"/>
   </g>
 
   <!-- DIVIDER 9: Medical Cross Accent -->
