@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 80">
   <style>
-    .logo-icon { stroke: #C8FF00; stroke-width: 2; fill: none; }
+    .logo-icon { stroke: #FFD60A; stroke-width: 2; fill: none; }
   </style>
   <g transform="translate(0, 0)">
     <!-- Pill shape -->

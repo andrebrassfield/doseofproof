@@ -2,14 +2,14 @@
   <defs>
     <style>
       .diagram-text { fill: #FFFFFF; font-family: Arial, sans-serif; font-size: 12px; }
-      .diagram-label { fill: #C8FF00; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; }
-      .diagram-line { stroke: #C8FF00; stroke-width: 2; fill: none; }
-      .diagram-box { stroke: #C8FF00; stroke-width: 1.5; fill: none; }
-      .diagram-arrow { stroke: #C8FF00; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
-      .step-circle { fill: #0D0D0D; stroke: #C8FF00; stroke-width: 2; }
+      .diagram-label { fill: #FFD60A; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; }
+      .diagram-line { stroke: #FFD60A; stroke-width: 2; fill: none; }
+      .diagram-box { stroke: #FFD60A; stroke-width: 1.5; fill: none; }
+      .diagram-arrow { stroke: #FFD60A; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .step-circle { fill: #0D0D0D; stroke: #FFD60A; stroke-width: 2; }
     </style>
     <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#C8FF00"/>
+      <polygon points="0 0, 10 3, 0 6" fill="#FFD60A"/>
     </marker>
   </defs>
 
